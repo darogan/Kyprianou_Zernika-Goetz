@@ -24,6 +24,11 @@ __Figure__  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_000
 
 ### Step 2: Analyse expression for Mmp genes in published scRNA-seq data
 
+#### Expression Vs Age
+
+To be done soon
+
+#### Correlations to marker genes
 After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlations with p.value.
 
 Example for Mmp14:
