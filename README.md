@@ -28,7 +28,7 @@ __Figure__  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_000
 
 ![Mmp Vs Epiblast Age](scRNA/CTR_mz205_0007_mmp.age.png?raw=true=100x)
 
-Figure: [[CTR_mz205_0007_mmp.age.pdf](scRNA/TR_mz205_0007_mmp.age.pdf)] [[CTR_mz205_0007_mmp.age.png](scRNA/TR_mz205_0007_mmp.age.png)]
+Figure: [[CTR_mz205_0007_mmp.age.pdf](scRNA/CTR_mz205_0007_mmp.age.pdf)] [[CTR_mz205_0007_mmp.age.png](scRNA/CTR_mz205_0007_mmp.age.png)]
 
 
 #### Correlations to marker genes
