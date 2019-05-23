@@ -26,13 +26,16 @@ __Figure__  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_000
 
 #### Expression Vs Age
 
-To be done soon
+![Mmp Vs Epiblast Age](scRNA/CTR_mz205_0007_mmp.age.png?raw=true=100x)
+
+Figure: [[CTR_mz205_0007_mmp.age.pdf](scRNA/TR_mz205_0007_mmp.age.pdf)] [[CTR_mz205_0007_mmp.age.png](scRNA/TR_mz205_0007_mmp.age.png)]
+
 
 #### Correlations to marker genes
 After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlations with p.value.
 
 Example for Mmp14:
-![Mp14 Correlations](scRNA/CTR_mz205_0007_Mmp14.png?raw=true=100x)
+![Mmp14 Correlations](scRNA/CTR_mz205_0007_Mmp14.png?raw=true=100x)
 
 | Mmp   | PNG | PDF  |
 | ----- | --- | ---- |
