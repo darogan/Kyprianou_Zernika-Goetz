@@ -262,3 +262,24 @@ for (i in seq(1, (length(MMPs)-3), 1))
 
 
 
+test.data.ann.m <- melt(test.data.ann)
+test.data.ann.m <- test.data.ann.m[grep(pattern = "Mmp", x = test.data.ann.m$variable),]
+
+plt.mmp.age <- ggplot(test.data.ann.m, aes(x=Age, y=log2(value+1), group=as.factor(Age), colour=Age) ) +
+               geom_boxplot(outlier.alpha = 0) +
+               geom_jitter(alpha=0.75, size=0.1) +
+               facet_wrap(variable ~ ., ncol=3) +
+               ylab("log2(RPKM+1)") +
+               ggtitle("Mmp expression vs Epiblast Cell Age") +
+               theme(text=element_text(size=12,  family="sans"), legend.position = 'none')
+
+pdf(paste0(Project, "_mmp.age",".pdf"), width=5,height=10)
+par(bg=NA)
+print(plt.mmp.age)
+dev.off()
+
+png(paste0(Project, "_mmp.age",".png"), units="cm", width=12, height=20, res=180)
+par(bg=NA)
+print(plt.mmp.age)
+dev.off()
+
