@@ -16,7 +16,7 @@ Download supplimental files from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/qu
 
 Use bash script [make_sample2Age_table.sh](scRNA/make_sample2Age_table.sh) to make a look up table of cell idetifiers to cell ages [sample2age.tab.csv](scRNA/sample2age.tab.csv)
 
-Using the R script [CTR_mz205_0007.scRNA.R](scRNA/CTR_mz205_0007.scRNA.R) to first cluster and plot a dimensional reduction (UMAP) of the scRNA-seq data (note the original paper used tSNE). To identify the Epiblast cells _Pou5f1_ was used as a marker. Clusters excluded fro further analysis are the ExE (marker = _Bmp4_) and VE (marker = _Amn_). The figure below shows: __A.__ Finding clusters, __B.__ cluster identification and __C.__ Identified clusters.
+Using the R script [CTR_mz205_0007.scRNA.R](scRNA/CTR_mz205_0007.scRNA.R) to first cluster and plot a dimensional reduction (UMAP) of the scRNA-seq data (note the original paper used tSNE). To identify the Epiblast cells _Pou5f1_ was used as a marker. Clusters excluded from further analysis are the ExE (marker = _Bmp4_) and VE (marker = _Amn_). The figure below shows: __A.__ Finding clusters, __B.__ cluster identification using markers and __C.__ Labelling identified clusters.
 
 ![Dimensionality Reduction](scRNA/CTR_mz205_0007_scUMAPs.png?raw=true=100x)
 
@@ -24,7 +24,7 @@ __Figure__  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_000
 
 ### Step 2: Analyse expression for Mmp genes in published scRNA-seq data
 
-After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlatins with p.value.
+After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlations with p.value.
 
 Example for Mmp14:
 ![Mp14 Correlations](scRNA/CTR_mz205_0007_Mmp14.png?raw=true=100x)
@@ -71,7 +71,7 @@ Missing Mmps, not present in the scRNA RPKM matrix.
 
 To be completed soon
 
-## Methods
+## Software Versions & Methods
 
 ````
 R version 3.4.4 (2018-03-15)
