@@ -24,28 +24,33 @@ __Figure__  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_000
 
 ### Step 2: Analyse expression for Mmp genes in published scRNA-seq data
 
+After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlatins with p.value.
+
+Example for Mmp14:
+![Mp14 Correlations](scRNA/CTR_mz205_0007_Mmp14.png?raw=true=100x)
+
 | Mmp   | PDF | PNG  |
 | ----- | --- | ---- |
-| Mmp1a | [CTR_mz205_0007_Mmp1a.png](CTR_mz205_0007_Mmp1a.png) | [CTR_mz205_0007_Mmp1a.png](CTR_mz205_0007_Mmp1a.png) |
-| Mmp1b | [CTR_mz205_0007_Mmp1b.png](CTR_mz205_0007_Mmp1b.png) | [CTR_mz205_0007_Mmp1b.png](CTR_mz205_0007_Mmp1b.png) |
-| __Mmp2__  | [CTR_mz205_0007_Mmp2.png](CTR_mz205_0007_Mmp2.png)   | [CTR_mz205_0007_Mmp2.png](CTR_mz205_0007_Mmp2.png) |
+| Mmp1a | [CTR_mz205_0007_Mmp1a.png](scRNA/CTR_mz205_0007_Mmp1a.png) | [CTR_mz205_0007_Mmp1a.png](scRNA/CTR_mz205_0007_Mmp1a.pdf) |
+| Mmp1b | [CTR_mz205_0007_Mmp1b.png](scRNA/CTR_mz205_0007_Mmp1b.png) | [CTR_mz205_0007_Mmp1b.png](scRNA/CTR_mz205_0007_Mmp1b.pdf) |
+| __Mmp2__  | [CTR_mz205_0007_Mmp2.png](scRNA/CTR_mz205_0007_Mmp2.png)   | [CTR_mz205_0007_Mmp2.png](scRNA/CTR_mz205_0007_Mmp2.pdf) |
 | Mmp3 | _missing_ | _missing_ |
-| Mmp7  | [CTR_mz205_0007_Mmp7.png](CTR_mz205_0007_Mmp7.png)   | [CTR_mz205_0007_Mmp7.png](CTR_mz205_0007_Mmp7.png) |
+| Mmp7  | [CTR_mz205_0007_Mmp7.png](scRNA/CTR_mz205_0007_Mmp7.png)   | [CTR_mz205_0007_Mmp7.png](scRNA/CTR_mz205_0007_Mmp7.pdf) |
 | Mmp8 | _missing_ | _missing_ |
-| Mmp9  | [CTR_mz205_0007_Mmp9.png](CTR_mz205_0007_Mmp9.png)   | [CTR_mz205_0007_Mmp9.png](CTR_mz205_0007_Mmp9.png) |
+| Mmp9  | [CTR_mz205_0007_Mmp9.png](scRNA/CTR_mz205_0007_Mmp9.png)   | [CTR_mz205_0007_Mmp9.png](scRNA/CTR_mz205_0007_Mmp9.pdf) |
 | Mmp10 | _missing_ | _missing_ |
-| Mmp11 | [CTR_mz205_0007_Mmp11.png](CTR_mz205_0007_Mmp11.png) | [CTR_mz205_0007_Mmp11.png](CTR_mz205_0007_Mmp11.png) |
-| Mmp12 | [CTR_mz205_0007_Mmp12.png](CTR_mz205_0007_Mmp12.png) | [CTR_mz205_0007_Mmp12.png](CTR_mz205_0007_Mmp12.png) |
+| Mmp11 | [CTR_mz205_0007_Mmp11.png](scRNA/CTR_mz205_0007_Mmp11.png) | [CTR_mz205_0007_Mmp11.png](scRNA/CTR_mz205_0007_Mmp11.pdf) |
+| Mmp12 | [CTR_mz205_0007_Mmp12.png](scRNA/CTR_mz205_0007_Mmp12.png) | [CTR_mz205_0007_Mmp12.png](scRNA/CTR_mz205_0007_Mmp12.pdf) |
 | Mmp13 | _missing_ | _missing_ |
-| __Mmp14__ | [CTR_mz205_0007_Mmp14.png](CTR_mz205_0007_Mmp14.png) | [CTR_mz205_0007_Mmp14.png](CTR_mz205_0007_Mmp14.png) |
-| Mmp15 | [CTR_mz205_0007_Mmp15.png](CTR_mz205_0007_Mmp15.png) | [CTR_mz205_0007_Mmp15.png](CTR_mz205_0007_Mmp15.png) |
-| Mmp16 | [CTR_mz205_0007_Mmp16.png](CTR_mz205_0007_Mmp16.png) | [CTR_mz205_0007_Mmp16.png](CTR_mz205_0007_Mmp16.png) |
-| Mmp17 | [CTR_mz205_0007_Mmp17.png](CTR_mz205_0007_Mmp17.png) | [CTR_mz205_0007_Mmp17.png](CTR_mz205_0007_Mmp17.png) |
-| Mmp19 | [CTR_mz205_0007_Mmp19.png](CTR_mz205_0007_Mmp19.png) | [CTR_mz205_0007_Mmp19.png](CTR_mz205_0007_Mmp19.png) |
-| Mmp21 | [CTR_mz205_0007_Mmp21.png](CTR_mz205_0007_Mmp21.png) | [CTR_mz205_0007_Mmp21.png](CTR_mz205_0007_Mmp21.png) |
-| Mmp23 | [CTR_mz205_0007_Mmp23.png](CTR_mz205_0007_Mmp23.png) | [CTR_mz205_0007_Mmp23.png](CTR_mz205_0007_Mmp23.png) |
-| Mmp24 | [CTR_mz205_0007_Mmp24.png](CTR_mz205_0007_Mmp24.png) | [CTR_mz205_0007_Mmp24.png](CTR_mz205_0007_Mmp24.png) |
-| __Mmp25__ | [CTR_mz205_0007_Mmp25.png](CTR_mz205_0007_Mmp25.png) | [CTR_mz205_0007_Mmp25.png](CTR_mz205_0007_Mmp25.png) |
+| __Mmp14__ | [CTR_mz205_0007_Mmp14.png](scRNA/CTR_mz205_0007_Mmp14.png) | [CTR_mz205_0007_Mmp14.png](scRNA/CTR_mz205_0007_Mmp14.pdf) |
+| Mmp15 | [CTR_mz205_0007_Mmp15.png](scRNA/CTR_mz205_0007_Mmp15.png) | [CTR_mz205_0007_Mmp15.png](scRNA/CTR_mz205_0007_Mmp15.pdf) |
+| Mmp16 | [CTR_mz205_0007_Mmp16.png](scRNA/CTR_mz205_0007_Mmp16.png) | [CTR_mz205_0007_Mmp16.png](scRNA/CTR_mz205_0007_Mmp16.pdf) |
+| Mmp17 | [CTR_mz205_0007_Mmp17.png](scRNA/CTR_mz205_0007_Mmp17.png) | [CTR_mz205_0007_Mmp17.png](scRNA/CTR_mz205_0007_Mmp17.pdf) |
+| Mmp19 | [CTR_mz205_0007_Mmp19.png](scRNA/CTR_mz205_0007_Mmp19.png) | [CTR_mz205_0007_Mmp19.png](scRNA/CTR_mz205_0007_Mmp19.pdf) |
+| Mmp21 | [CTR_mz205_0007_Mmp21.png](scRNA/CTR_mz205_0007_Mmp21.png) | [CTR_mz205_0007_Mmp21.png](scRNA/CTR_mz205_0007_Mmp21.pdf) |
+| Mmp23 | [CTR_mz205_0007_Mmp23.png](scRNA/CTR_mz205_0007_Mmp23.png) | [CTR_mz205_0007_Mmp23.png](scRNA/CTR_mz205_0007_Mmp23.pdf) |
+| Mmp24 | [CTR_mz205_0007_Mmp24.png](scRNA/CTR_mz205_0007_Mmp24.png) | [CTR_mz205_0007_Mmp24.png](scRNA/CTR_mz205_0007_Mmp24.pdf) |
+| __Mmp25__ | [CTR_mz205_0007_Mmp25.png](scRNA/CTR_mz205_0007_Mmp25.png) | [CTR_mz205_0007_Mmp25.png](scRNA/CTR_mz205_0007_Mmp25.pdf) |
 | Mmp26 | _missing_ | _missing_ |
 | Mmp27 | _missing_ | _missing_ |
 | Mmp28 | [CTR_mz205_0007_Mmp28.png](CTR_mz205_0007_Mmp28.png) | [CTR_mz205_0007_Mmp28.png](CTR_mz205_0007_Mmp28.png) |
