@@ -60,6 +60,8 @@ __Download Figure__:  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Ages.pdf)] [[PNG](scRN
 
 #### Plot gene specific UMAPs
 
+For all ages (5.25, 5.5, 6.25 and 6.5) unless stated otherwise.
+
 | Genes | UMAP    | PDF |
 | ----- | ------- | --- |
 | All Mmp genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.pdf)]     |
