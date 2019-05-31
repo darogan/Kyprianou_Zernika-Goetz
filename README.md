@@ -14,13 +14,59 @@ Download supplimental files from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/qu
 * [GSE109071_rpkm.txt](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE109071&format=file&file=GSE109071%5Frpkm%2Etxt%2Egz)
 * [GSE109071_series_matrix.txt](http://ftp.ncbi.nlm.nih.gov/geo/series/GSE109nnn/GSE109071/matrix/GSE109071_series_matrix.txt.gz)
 
-Use bash script [make_sample2Age_table.sh](scRNA/make_sample2Age_table.sh) to make a look up table of cell idetifiers to cell ages [sample2age.tab.csv](scRNA/sample2age.tab.csv)
-
 Using the R script [CTR_mz205_0007.scRNA.R](scRNA/CTR_mz205_0007.scRNA.R) to first cluster and plot a dimensional reduction (UMAP) of the scRNA-seq data (note the original paper used tSNE). To identify the Epiblast cells _Pou5f1_ was used as a marker. Clusters excluded from further analysis are the ExE (marker = _Bmp4_) and VE (marker = _Amn_). The figure below shows: __A.__ Finding clusters, __B.__ cluster identification using markers and __C.__ Labelling identified clusters.
 
 <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.png" width=400px>
 
 __Download Figure__:  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_0007_scUMAPs.png)]
+
+
+#### Find cells in UMAP by Age
+
+Use bash script [make_sample2Age_table.sh](scRNA/make_sample2Age_table.sh) to make a look up table of cell identifiers to cell ages [sample2age.tab.csv](scRNA/sample2age.tab.csv)
+
+> Number of cells by age
+
+| Age     | Number of Cells |
+| ------- | --------------- |
+| __All__ | __1724__        |
+| 5.25    |    331          |
+| 5.5     |    269          |
+| 6.25    |    321          |
+| 6.5     |    803          |
+
+> Number of cells by cell type
+
+| CellType | Number of Cells |
+| -------- | --------------- |
+| __All__  | __1724__        |
+| EPI      | 775             |
+| ExE      | 283             |
+| VE       | 666             |
+
+> Number of cells by cell type and age
+
+|          | EPI | ExE | VE  |
+| -------- | --- | --- | --- |
+| __5.25__ | 128 |  67 | 136 |
+| __5.5__  | 120 |  45 | 104 |
+| __6.25__ | 143 |  87 |  91 |
+| __6.5__  | 384 |  84 | 335 |
+
+UMAP showing distribution of cells by age:<BR>
+<IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Ages.png" width=400px>
+
+__Download Figure__:  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Ages.pdf)] [[PNG](scRNA/CTR_mz205_0007_scUMAPs.Ages.png)]
+
+#### Plot gene specific UMAPs
+
+| Genes | UMAP    | PDF |
+| ----- | ------- | --- |
+| All Mmp genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.pdf)]     |
+| Mmp2, Mmp14, MMp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.pdf)]  |
+| Marker Genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Markers.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Markers.pdf)]     |
+| Laminins | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Laminins.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Laminins.pdf)]   |
+| Collagens | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Collagens.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Collagens.pdf)] |
 
 ### Step 2: Analyse expression for Mmp genes in published scRNA-seq data
 
@@ -30,6 +76,7 @@ __Download Figure__:  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR
 
 __Download Figure__: [[CTR_mz205_0007_mmp.age.pdf](scRNA/CTR_mz205_0007_mmp.age.pdf)] [[CTR_mz205_0007_mmp.age.png](scRNA/CTR_mz205_0007_mmp.age.png)]
 
+### Step 3: Analyse correlation of expression of Mmp genes with marker genes
 
 #### Correlations to marker genes
 After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlations with p.value.
@@ -74,7 +121,6 @@ Missing Mmps, not present in the scRNA RPKM matrix.
 | Mmp26 | not found in mouse |
 | Mmp27 | ? |
 
-
 ## Investigating Mmp ChIP-Seq associations
 
 ChIP Data generated in this paper:
@@ -94,7 +140,7 @@ Four tracks were chosen
 * GSM1782928_Smad2_3_D3EB_AC_p53WT
 * GSM1782929_Smad2_3_D3EB_SB_p53WT
 
-The tracks are in IGVs __tdf__ format, but to be copatile with `karyoploteR` they must first be converted to __bedgraph__, and then finally to __bigwig__ using [convert_tdf2bedgraph2bigwig.sh](ChIP/convert_tdf2bedgraph2bigwig.sh) (which itself calls [bdg2bw.sh](ChIP/bdg2bw.sh) taken from this [Gist](https://gist.github.com/taoliu/2469050))
+The tracks are in IGVs __tdf__ format, but to be compatible with `karyoploteR` they must first be converted to __bedgraph__, and then finally to __bigwig__ using [convert_tdf2bedgraph2bigwig.sh](ChIP/convert_tdf2bedgraph2bigwig.sh) (which itself calls [bdg2bw.sh](ChIP/bdg2bw.sh) taken from this [Gist](https://gist.github.com/taoliu/2469050))
 
 Example for Mmp14:<BR>
 <IMG SRC="ChIP/CTR_mz205_0007.ChIP.Mmp14.png" width=400px>

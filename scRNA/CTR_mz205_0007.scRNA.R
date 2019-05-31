@@ -129,15 +129,6 @@ par(bg=NA)
 plt.dim.red 
 dev.off()
 
-# TSNE
-#matrix.tsne         <- as.data.frame(Embeddings(object=matrix.su, reduction.type="tsne", dims.use=1:2))
-#res <- 0.2
-#reso                <- paste0("res.", res)
-#clust               <- matrix.su@meta.data %>% dplyr::select(contains(reso))
-#colnames(clust)     <- c("Cluster")
-#matrix.tsne$Cluster <- clust$Cluster
-#head(matrix.tsne)
-
 
 
 
@@ -149,42 +140,87 @@ cell.idents$CellNames <- rownames(cell.idents)
 colnames(cell.idents) <- c("CellType", "Sample")
 cell.idents           <- merge(cell.idents,sample2age, by='Sample', sort=F)
 rownames(cell.idents) <- cell.idents$Sample
-table(cell.idents$Age)
+matrix.su             <- AddMetaData( object = matrix.su, metadata=as.character(cell.idents$Age),       col.name='Age')
+matrix.su             <- AddMetaData( object = matrix.su, metadata=as.character(cell.idents$CellType), col.name='CellType')
 
-matrix.su             <- AddMetaData( object = matrix.su, metadata=as.character(cell.idents$Age), col.name='Age')
-head(matrix.su@meta.data)
+#CTR_mz205_0007.UMAP.Mmp11.pdf
 
-FeaturePlot(matrix.su, features = "Age", cols = c("red","blue","green","purple"), pt.size = 0.25, reduction="umap") 
+meta.data.selection <- c("UMAP_1", "UMAP_2", "Age", "CellType", "seurat_clusters", 
+                         "Mmp24", "Mmp9", "Mmp16", "Mmp23", "Mmp17", "Mmp21","Mmp2","Mmp15", "Mmp1a","Mmp1b",
+                         "Mmp12", "Mmp7", "Mmp11", "Mmp19", "Mmp28", "Mmp14", "Mmp25", 
+                         "T", "Otx2", "Nodal", "Fam25c",
+                         "Col18a1", "Col4a1", "Col9a3", "Lama1", "Lama5", "Lamb1", "Lamc1" )
 
-
-
-
-matrix.umap  <- FetchData(object = matrix.su, vars = c("UMAP_1", "UMAP_2", "Age", "orig.ident", "seurat_clusters", "Mmp2", "Mmp14", "Mmp25", "T", "Nodal"))
+matrix.umap  <- FetchData(object = matrix.su, vars = meta.data.selection )
 head(matrix.umap)
 
-ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Age)) +
-  geom_point(alpha=0.5, size=1) +
-  scale_colour_manual("", values = c("5.25"="grey", "5.5"="grey", "6.25"="red", "6.5"="grey"))
+table(matrix.umap$Age)
+table(matrix.umap$CellType)
+table(matrix.umap$Age, matrix.umap$CellType)
 
-ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=T)) +
-  geom_point(alpha=0.5, size=1) +
-  scale_colour_gradientn(colours = c("lightgrey","red"))
 
-ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Nodal)) +
-  geom_point(alpha=0.5, size=1) +
-  scale_colour_gradientn(colours = c("lightgrey","red"))
+# Distribution of cell ages and Types
 
-ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Mmp2)) +
-  geom_point(alpha=0.5, size=1) +
-  scale_colour_gradientn(colours = c("lightgrey","red"))
+plt.age.all <- ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Age)) +
+               geom_point(alpha=0.5, size=0.5) +
+               scale_colour_manual("", values = c("5.25"="blue", "5.5"="red", "6.25"="purple", "6.5"="green")) +
+               theme(aspect.ratio=1, text = element_text(size=8), 
+                     axis.text.x = element_text(size=6), axis.text.y = element_text(size=6), 
+                     legend.position = "bottom") +
+               guides(colour = guide_legend(override.aes = list(size=2))) 
 
-ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Mmp14)) +
-  geom_point(alpha=0.5, size=1) +
-  scale_colour_gradientn(colours = c("lightgrey","red"))
+plt.age.625 <- ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Age)) +
+               geom_point(alpha=0.5, size=0.5) +
+               scale_colour_manual("", values = c("5.25"="grey", "5.5"="grey", "6.25"="purple", "6.5"="grey")) +
+               theme(aspect.ratio=1, text = element_text(size=8), 
+                     axis.text.x = element_text(size=6), axis.text.y = element_text(size=6), 
+                     legend.position = "bottom") +
+               guides(colour = guide_legend(override.aes = list(size=2)))
 
-ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Mmp25)) +
-  geom_point(alpha=0.5, size=1) +
-  scale_colour_gradientn(colours = c("lightgrey","red"))
+plt.age.combo <- plot_grid(plt.age.all, plt.age.625, ncol=2)
+
+pdf(paste0(Project, "_scUMAPs.Ages", ".pdf"), width=7.5,height=4)
+par(bg=NA)
+plt.age.combo
+dev.off()
+
+
+head(matrix.umap)
+matrix.umap.m <- melt(matrix.umap, id=c("UMAP_1","UMAP_2","Age","CellType","seurat_clusters"))
+head(matrix.umap.m)
+
+
+plt.all.Mmps <- ggplot(matrix.umap.m[ grep("Mmp", matrix.umap.m$variable), ], aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
+                geom_point(alpha=1, size=0.25) +
+                scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+                facet_wrap( ~variable, ncol=6) +
+                theme(aspect.ratio=1, text = element_text(size=8), 
+                axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
+plt.all.Mmps
+
+plt.all.Mark <- ggplot( subset(matrix.umap.m, !grepl("Mmp", variable)), aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
+                geom_point(alpha=1, size=0.25) +
+                scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+                facet_wrap( ~variable, ncol=6) +
+                theme(aspect.ratio=1, text = element_text(size=8), 
+                axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
+plt.all.Mark
+
+plt.main.Mmps <- ggplot( subset(matrix.umap.m, variable == "Mmp2" | variable == "Mmp14" | variable == "Mmp25"), 
+                         aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
+                 geom_point(alpha=1, size=0.25) +
+                 scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+                 facet_wrap( ~variable, nrow=1) +
+                 theme(aspect.ratio=1, text = element_text(size=8), 
+                 axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
+plt.main.Mmps
+
+
+
+
+
+
+
 
 
 
