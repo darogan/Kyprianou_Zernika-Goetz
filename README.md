@@ -18,24 +18,24 @@ Use bash script [make_sample2Age_table.sh](scRNA/make_sample2Age_table.sh) to ma
 
 Using the R script [CTR_mz205_0007.scRNA.R](scRNA/CTR_mz205_0007.scRNA.R) to first cluster and plot a dimensional reduction (UMAP) of the scRNA-seq data (note the original paper used tSNE). To identify the Epiblast cells _Pou5f1_ was used as a marker. Clusters excluded from further analysis are the ExE (marker = _Bmp4_) and VE (marker = _Amn_). The figure below shows: __A.__ Finding clusters, __B.__ cluster identification using markers and __C.__ Labelling identified clusters.
 
-![Dimensionality Reduction](scRNA/CTR_mz205_0007_scUMAPs.png?raw=true=100x)
+<IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.png" width=400px>
 
-__Figure__  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_0007_scUMAPs.png)]
+__Download Figure__:  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_0007_scUMAPs.png)]
 
 ### Step 2: Analyse expression for Mmp genes in published scRNA-seq data
 
 #### Expression Vs Age
 
-![Mmp Vs Epiblast Age](scRNA/CTR_mz205_0007_mmp.age.png?raw=true=100x)
+<IMG SRC="scRNA/CTR_mz205_0007_mmp.age.png" width=400px>
 
-Figure: [[CTR_mz205_0007_mmp.age.pdf](scRNA/CTR_mz205_0007_mmp.age.pdf)] [[CTR_mz205_0007_mmp.age.png](scRNA/CTR_mz205_0007_mmp.age.png)]
+__Download Figure__: [[CTR_mz205_0007_mmp.age.pdf](scRNA/CTR_mz205_0007_mmp.age.pdf)] [[CTR_mz205_0007_mmp.age.png](scRNA/CTR_mz205_0007_mmp.age.png)]
 
 
 #### Correlations to marker genes
 After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlations with p.value.
 
 Example for Mmp14:
-![Mmp14 Correlations](scRNA/CTR_mz205_0007_Mmp14.png?raw=true=100x)
+<IMG SRC="scRNA/CTR_mz205_0007_Mmp14.png" width=400px>
 
 | Mmp   | PNG | PDF  |
 | ----- | --- | ---- |
@@ -95,6 +95,10 @@ Four tracks were chosen
 * GSM1782929_Smad2_3_D3EB_SB_p53WT
 
 The tracks are in IGVs __tdf__ format, but to be copatile with `karyoploteR` they must first be converted to __bedgraph__, and then finally to __bigwig__ using [convert_tdf2bedgraph2bigwig.sh](ChIP/convert_tdf2bedgraph2bigwig.sh) (which itself calls [bdg2bw.sh](ChIP/bdg2bw.sh) taken from this [Gist](https://gist.github.com/taoliu/2469050))
+
+Example for Mmp14:
+<IMG SRC="ChIP/CTR_mz205_0007.ChIP.Mmp14.png" width=400px>
+
 
 | Mmp   | ChIP Track Figure             |
 | ----- | ----------------------------- |
