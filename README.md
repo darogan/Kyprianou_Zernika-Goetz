@@ -34,7 +34,7 @@ __Download Figure__: [[CTR_mz205_0007_mmp.age.pdf](scRNA/CTR_mz205_0007_mmp.age.
 #### Correlations to marker genes
 After extraction of the Epiblast cells from the scRNA-seq the next step is to plot the Mmp expression values against a selection of markers: T, Otx2 and Nodal. r values are Pearson's correlations with p.value.
 
-Example for Mmp14:
+Example for Mmp14:<BR>
 <IMG SRC="scRNA/CTR_mz205_0007_Mmp14.png" width=400px>
 
 | Mmp   | PNG | PDF  |
@@ -96,7 +96,7 @@ Four tracks were chosen
 
 The tracks are in IGVs __tdf__ format, but to be copatile with `karyoploteR` they must first be converted to __bedgraph__, and then finally to __bigwig__ using [convert_tdf2bedgraph2bigwig.sh](ChIP/convert_tdf2bedgraph2bigwig.sh) (which itself calls [bdg2bw.sh](ChIP/bdg2bw.sh) taken from this [Gist](https://gist.github.com/taoliu/2469050))
 
-Example for Mmp14:
+Example for Mmp14:<BR>
 <IMG SRC="ChIP/CTR_mz205_0007.ChIP.Mmp14.png" width=400px>
 
 
