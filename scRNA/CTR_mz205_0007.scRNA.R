@@ -43,7 +43,7 @@ library("matrixStats")
 library(umap)
 
 #pip install umap-learn
-reticulate::py_install(packages = 'umap-learn')
+#reticulate::py_install(packages = 'umap-learn')
 
 baseDir <- "~/Documents/CTR-Groups/Magda_Zernica-Goetz/CTR_mz205_0007_Christos_and_Neophytos/scRNA"
 setwd(baseDir)
@@ -129,7 +129,6 @@ par(bg=NA)
 plt.dim.red 
 dev.off()
 
-
 # TSNE
 #matrix.tsne         <- as.data.frame(Embeddings(object=matrix.su, reduction.type="tsne", dims.use=1:2))
 #res <- 0.2
@@ -138,6 +137,55 @@ dev.off()
 #colnames(clust)     <- c("Cluster")
 #matrix.tsne$Cluster <- clust$Cluster
 #head(matrix.tsne)
+
+
+
+
+#
+# Annotate the Cells with Ages
+#
+cell.idents           <- as.data.frame(Idents(matrix.su))
+cell.idents$CellNames <- rownames(cell.idents)
+colnames(cell.idents) <- c("CellType", "Sample")
+cell.idents           <- merge(cell.idents,sample2age, by='Sample', sort=F)
+rownames(cell.idents) <- cell.idents$Sample
+table(cell.idents$Age)
+
+matrix.su             <- AddMetaData( object = matrix.su, metadata=as.character(cell.idents$Age), col.name='Age')
+head(matrix.su@meta.data)
+
+FeaturePlot(matrix.su, features = "Age", cols = c("red","blue","green","purple"), pt.size = 0.25, reduction="umap") 
+
+
+
+
+matrix.umap  <- FetchData(object = matrix.su, vars = c("UMAP_1", "UMAP_2", "Age", "orig.ident", "seurat_clusters", "Mmp2", "Mmp14", "Mmp25", "T", "Nodal"))
+head(matrix.umap)
+
+ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Age)) +
+  geom_point(alpha=0.5, size=1) +
+  scale_colour_manual("", values = c("5.25"="grey", "5.5"="grey", "6.25"="red", "6.5"="grey"))
+
+ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=T)) +
+  geom_point(alpha=0.5, size=1) +
+  scale_colour_gradientn(colours = c("lightgrey","red"))
+
+ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Nodal)) +
+  geom_point(alpha=0.5, size=1) +
+  scale_colour_gradientn(colours = c("lightgrey","red"))
+
+ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Mmp2)) +
+  geom_point(alpha=0.5, size=1) +
+  scale_colour_gradientn(colours = c("lightgrey","red"))
+
+ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Mmp14)) +
+  geom_point(alpha=0.5, size=1) +
+  scale_colour_gradientn(colours = c("lightgrey","red"))
+
+ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Mmp25)) +
+  geom_point(alpha=0.5, size=1) +
+  scale_colour_gradientn(colours = c("lightgrey","red"))
+
 
 
 EPI.cells.use <- WhichCells(object = matrix.su, idents = 'EPI')
@@ -282,4 +330,9 @@ png(paste0(Project, "_mmp.age",".png"), units="cm", width=12, height=20, res=180
 par(bg=NA)
 print(plt.mmp.age)
 dev.off()
+
+
+message("+-------------------------------------------------------------------------------")
+message("+ END OF SCRIPT ")
+message("+-------------------------------------------------------------------------------")
 
