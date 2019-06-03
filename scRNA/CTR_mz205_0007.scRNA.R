@@ -217,15 +217,15 @@ plt.main.Mmps
 dev.off()
 
 plt.main.Mmps.625 <- ggplot() +
-                     geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "Mmp2" | variable == "Mmp14" | variable == "Mmp25")), 
-                                aes(x=UMAP_1, y=UMAP_2), colour="lightgrey", alpha=1, size=0.1, show.legend=F) +
+                     geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "Mmp2" | variable == "Mmp14")), 
+                                aes(x=UMAP_1, y=UMAP_2), colour="lightgrey", alpha=1, size=0.5, show.legend=F) +
                      geom_point( data=subset(matrix.umap.m, 
-                                             CellType== "EPI" & Age>=6 & (variable == "Mmp2" | variable == "Mmp14" | variable == "Mmp25")), 
-                                 aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable), alpha=1, size=0.1) +
+                                             CellType== "EPI" & Age>=6 & (variable == "Mmp2" | variable == "Mmp14")), 
+                                 aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable), alpha=1, size=0.5) +
                      scale_colour_gradient2(name="RPKM", low="blue", mid="blue", high="red") +
                      xlim(-2.5,NA) +  ylim(NA,2.5) + xlab("UMAP 1") + ylab("UMAP 2") +
                      facet_wrap( ~variable, nrow=1) +
-                     ggtitle("Epiblast cells Age 6.25 & 6.5") +
+                     #ggtitle("Epiblast cells Age 6.25 & 6.5") +
                      theme(aspect.ratio=1, text = element_text(size=8), plot.title =  element_text(size=8),
                            axis.text.x = element_text(size=6), axis.text.y = element_text(size=6),
                            legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines") )
@@ -250,24 +250,24 @@ plt.main.Mark
 dev.off()
 
 plt.main.Mark.625 <- ggplot() +
-  geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "T" | variable == "Nodal" | variable == "Otx2" | variable == "Fam25c")), 
+  geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "T" | variable == "Nodal")), 
              aes(x=UMAP_1, y=UMAP_2), colour="lightgrey", alpha=1, size=0.1, show.legend=F) +
   geom_point( data=subset(matrix.umap.m, 
-                          CellType== "EPI" & Age>=6 & (variable == "T" | variable == "Nodal" | variable == "Otx2" | variable == "Fam25c")), 
+                          CellType== "EPI" & Age>=6 & (variable == "T" | variable == "Nodal")), 
               aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable), alpha=1, size=0.1) +
   scale_colour_gradient2(name="RPKM", low="blue", mid="blue", high="red") +
   xlim(-2.5,NA) +  ylim(NA,2.5) +
   xlab("") + ylab("") +
-  facet_wrap( ~variable, nrow=1) +
+  facet_wrap( ~variable, nrow=2) +
   theme(aspect.ratio=1, text = element_text(size=8), plot.title =  element_text(size=8), line = element_blank(),
         axis.text.x = element_blank(), axis.text.y = element_blank(),
         legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines") )
 plt.main.Mark.625
 
 
-pdf(paste0(Project, "_scUMAPs.Figure", ".pdf"), width=5,height=3.5)
+pdf(paste0(Project, "_scUMAPs.Figure", ".pdf"), width=8,height=3.25)
 par(bg=NA)
-plot_grid(plt.main.Mmps.625, plt.main.Mark.625, nrow=2, rel_heights=c(1,0.75))
+plot_grid(plt.main.Mmps.625, plt.main.Mark.625, ncol=2, rel_widths=c(1,0.4))
 dev.off()
 
 
