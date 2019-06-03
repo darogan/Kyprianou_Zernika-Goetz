@@ -33,12 +33,14 @@
 library("Rtsne")
 library("useful")
 library("dplyr")
+library("plyr")
 library("Seurat")
 library("reshape2")
 library("ggplot2")
 library("cowplot")
 library("viridis")
 library("matrixStats")
+library("data.table")
 
 library(umap)
 
@@ -149,7 +151,7 @@ matrix.su             <- AddMetaData( object = matrix.su, metadata=as.character(
 meta.data.selection <- c("UMAP_1", "UMAP_2", "Age", "CellType", "seurat_clusters", 
                          "Mmp24", "Mmp9", "Mmp16", "Mmp23", "Mmp17", "Mmp21","Mmp2","Mmp15", "Mmp1a","Mmp1b",
                          "Mmp12", "Mmp7", "Mmp11", "Mmp19", "Mmp28", "Mmp14", "Mmp25", 
-                         "T", "Otx2", "Nodal", "Fam25c",
+                         "T", "Otx2", "Nodal", "Fam25c", "Tdgf1",
                          "Col18a1", "Col4a1", "Col9a3", "Lama1", "Lama5", "Lamb1", "Lamc1" )
 
 matrix.umap  <- FetchData(object = matrix.su, vars = meta.data.selection )
@@ -315,7 +317,7 @@ test
 MMPs <- c("Mmp24", "Mmp9", "Mmp16", "Mmp23", "Mmp17", 
           "Mmp21","Mmp2","Mmp15", "Mmp1a","Mmp1b",
           "Mmp12", "Mmp7", "Mmp11", "Mmp19", "Mmp28",
-          "Mmp14", "Mmp25", "T", "Otx2", "Nodal")
+          "Mmp14", "Mmp25", "T", "Otx2", "Nodal", "Tdgf1")
 
 
 EPI.cells.rpkm.mmp <- EPI.cells.rpkm[rownames(EPI.cells.rpkm) %in% MMPs, ]
@@ -363,7 +365,12 @@ labels <- c( "5.25"=paste("5.25 \n[ r=", signif(cor5.25$estimate,2), " p=", sign
              "6.25"=paste("6.25 \n[ r=", signif(cor6.25$estimate,2), " p=", signif(cor6.25$p.value,2),"]"),
              "6.5"=paste("6.5  \n[ r=",  signif(cor6.50$estimate,2), " p=", signif(cor6.50$p.value,2),"]") )
 
-#test.data.ann$density <- get_density(log2(test.data.ann[,c(markerGene)]+1), log2(test.data.ann[,c(mmpGene)]+1))
+
+message(paste("", mmpGene, markerGene,  
+               signif(cor5.25$estimate,2), signif(cor5.25$p.value,2),
+               signif(cor5.50$estimate,2), signif(cor5.50$p.value,2), 
+               signif(cor6.25$estimate,2), signif(cor6.25$p.value,2), 
+               signif(cor6.50$estimate,2), signif(cor6.50$p.value,2), "", sep=" | "))
 
 test.data.ann$density <- tryCatch( { get_density(log2(test.data.ann[,c("T")]+1), log2(test.data.ann[,c( MMPs[i])]+1)) },
                             error = function(error_condition) 
@@ -393,30 +400,33 @@ return(plot)
 }
 
 
-p1 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, "Mmp14", "T",     varXmax=10, varYmax=10, varScalemax=0.10)  
-p2 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, "Mmp14", "Otx2",  varXmax=10, varYmax=10, varScalemax=0.10)  
-p3 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, "Mmp14", "Nodal", varXmax=10, varYmax=10, varScalemax=0.10)  
-p4 <- plot_grid(p1, p2, p3, ncol=1)
-p4
+p1 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, "Mmp14", "T",     varXmax=12, varYmax=12, varScalemax=0.10)  
+p2 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, "Mmp14", "Otx2",  varXmax=12, varYmax=12, varScalemax=0.10)  
+p3 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, "Mmp14", "Nodal", varXmax=12, varYmax=12, varScalemax=0.10)  
+p4 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, "Mmp14", "Tdgf1", varXmax=12, varYmax=12, varScalemax=0.10)  
+
+pX <- plot_grid(p1, p2, p3, p4, ncol=1)
+pX
 
 
-for (i in seq(1, (length(MMPs)-3), 1))
+for (i in seq(1, (length(MMPs)-4), 1))
 {
   message(paste0("Running ", i, " and ", MMPs[i]))
   
-  p1 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "T",     varXmax=10, varYmax=10, varScalemax=0.125)  
-  p2 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "Otx2",  varXmax=10, varYmax=10, varScalemax=0.125)  
-  p3 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "Nodal", varXmax=10, varYmax=10, varScalemax=0.125)  
-  p4 <- plot_grid(p1, p2, p3, ncol=1)
+  p1 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "T",     varXmax=12, varYmax=12, varScalemax=0.125)  
+  p2 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "Otx2",  varXmax=12, varYmax=12, varScalemax=0.125)  
+  p3 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "Nodal", varXmax=12, varYmax=12, varScalemax=0.125) 
+  p4 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "Tdgf1", varXmax=12, varYmax=12, varScalemax=0.125)  
+  pX <- plot_grid(p1, p2, p3, p4, ncol=1)
   
   pdf(paste0(Project, "_", MMPs[i],".pdf"), width=7,height=6)
   par(bg=NA)
-  print(p4)
+  print(pX)
   dev.off()
   
-  png(paste0(Project, "_", MMPs[i],".png"), units="cm", width=16, height=15, res=180)
+  png(paste0(Project, "_", MMPs[i],".png"), units="cm", width=16, height=18, res=180)
   par(bg=NA)
-  print(p4)
+  print(pX)
   dev.off()
 }
 
@@ -443,6 +453,20 @@ png(paste0(Project, "_mmp.age",".png"), units="cm", width=12, height=20, res=180
 par(bg=NA)
 print(plt.mmp.age)
 dev.off()
+
+
+# Tabulate means
+t             <- ddply(test.data.ann.m, c("Age", "variable"), summarise, mean = mean(value))
+t.d           <- dcast(t, Age ~ variable)
+rownames(t.d) <- t.d$Age
+t.d.x         <-  t.d[ , !(names(t.d) %in% c("Age"))]
+
+print(  round(  t(t.d.x), digits=2) ) 
+
+write.table(format(t(t.d.x), digits=2), 'clipboard', sep='|',row.names=T)
+
+
+
 
 
 message("+-------------------------------------------------------------------------------")
