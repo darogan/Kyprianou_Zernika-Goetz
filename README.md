@@ -71,6 +71,12 @@ For all ages (5.25, 5.5, 6.25 and 6.5) unless stated otherwise.
 | Laminins | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Laminins.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Laminins.pdf)]   |
 | Collagens | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Collagens.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Collagens.pdf)] |
 
+
+#### Summarise Gene Level UMAPs
+
+<IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Figure.png" width=600px><BR>
+__Download Figure__: [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Figure.pdf)] [[CTR_mz205_0007_scUMAPs.Figure.png](scRNA/CTR_mz205_0007_scUMAPs.Figure.png)]
+
 ### Step 2: Analyse expression for Mmp genes in published scRNA-seq data
 
 #### Expression Vs Age
