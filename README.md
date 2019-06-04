@@ -107,6 +107,30 @@ __Download Figure__: [[CTR_mz205_0007_mmp.age.pdf](scRNA/CTR_mz205_0007_mmp.age.
 | Mmp14 | 11.32 | 9.99  | 13.70 | 21.59 |
 | Mmp25 | 22.69 | 17.15 | 23.91 | 13.35 |
 
+> Mean Expression of Mmp genes (Epiblast)
+> For cells with expression > 0 for each Mmp RNA
+
+| Mmp   |  5.25 |  5.5  |  6.25 |   6.5 |
+| ----- | ----: | ----: | ----: | ----: |
+| Mmp24 |  4.36 |  1.37 |  0.74 |  2.42 |
+| Mmp9  |  2.32 |  4.55 |  3.60 |  5.55 |
+| Mmp16 |  1.45 |  1.22 |  3.52 |  3.17 |
+| Mmp23 | 12.10 | 11.46 | 15.34 |  9.07 |
+| Mmp17 |  4.78 |  6.15 |  6.20 |  6.18 |
+| Mmp21 |  2.40 |  2.39 |  3.41 |  3.49 |
+| Mmp2  | 14.28 | 13.60 | 18.58 | 18.63 |
+| Mmp15 |  3.41 |  3.20 |  4.66 |  4.17 |
+| Mmp1a |   NaN | 19.99 |  7.89 |  4.59 |
+| Mmp1b |   NaN |  3.21 |  0.38 |  0.36 |
+| Mmp12 |  4.67 |  7.13 |  4.72 |  3.46 |
+| Mmp7  | 15.03 |  2.42 |   NaN |   NaN |
+| Mmp11 |  9.25 | 10.37 |  9.60 |  8.41 |
+| Mmp19 |  1.68 |  1.58 |  1.84 |  1.45 |
+| Mmp28 |  6.47 |  0.47 |  3.97 |  2.72 |
+| Mmp14 | 13.54 | 12.89 | 17.04 | 24.24 |
+| Mmp25 | 23.05 | 18.38 | 27.13 | 17.27 |
+
+
 ### Step 3: Analyse correlation of expression of Mmp genes with marker genes
 
 #### Correlations to marker genes
