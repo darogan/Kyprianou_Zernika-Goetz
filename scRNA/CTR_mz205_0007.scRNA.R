@@ -435,7 +435,7 @@ for (i in seq(1, (length(MMPs)-4), 1))
 
 test.data.ann.m <- melt(test.data.ann)
 test.data.ann.m <- test.data.ann.m[grep(pattern = "Mmp", x = test.data.ann.m$variable),]
-
+head(test.data.ann.m)
 plt.mmp.age <- ggplot(test.data.ann.m, aes(x=Age, y=log2(value+1), group=as.factor(Age), colour=Age) ) +
                geom_boxplot(outlier.alpha = 0) +
                geom_jitter(alpha=0.75, size=0.1) +
@@ -459,14 +459,17 @@ dev.off()
 t             <- ddply(test.data.ann.m, c("Age", "variable"), summarise, mean = mean(value))
 t.d           <- dcast(t, Age ~ variable)
 rownames(t.d) <- t.d$Age
-t.d.x         <-  t.d[ , !(names(t.d) %in% c("Age"))]
-
-print(  round(  t(t.d.x), digits=2) ) 
-
-write.table(format(t(t.d.x), digits=2), 'clipboard', sep='|',row.names=T)
+t.d.x         <-  t(t.d[ , !(names(t.d) %in% c("Age"))])
+print(round(t.d.x, digits=2) ) 
 
 
-
+test.data.ann.m.above0 <- test.data.ann.m
+test.data.ann.m.above0[test.data.ann.m.above0 == 0] <- NA
+t.above0             <- ddply(test.data.ann.m.above0, c("Age", "variable"), summarise, mean = mean(value, na.rm=TRUE))
+t.d.above0           <- dcast(t.above0, Age ~ variable)
+rownames(t.d.above0) <- t.d.above0$Age
+t.d.x.above0         <-  t(t.d.above0[ , !(names(t.d.above0) %in% c("Age"))])
+print(round(t.d.x.above0, digits=2) )
 
 
 message("+-------------------------------------------------------------------------------")
