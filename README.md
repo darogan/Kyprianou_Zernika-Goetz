@@ -86,6 +86,7 @@ __Download Figure__: [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Figure.pdf)] [[CTR_mz20
 __Download Figure__: [[CTR_mz205_0007_mmp.age.pdf](scRNA/CTR_mz205_0007_mmp.age.pdf)] [[CTR_mz205_0007_mmp.age.png](scRNA/CTR_mz205_0007_mmp.age.png)]
 
 > Table: Mean Expression of Mmp genes (Epiblast)
+> The expression values are a mean of each Mmp RNA across all epiblast cells (all time points), this will include cells where no expression is detected.
 
 | Mmp   |  5.25 |  5.5  |  6.25 |   6.5 |
 | ----- | ----: | ----: | ----: | ----: |
