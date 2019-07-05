@@ -272,9 +272,16 @@ Four tracks were chosen
 
 The tracks are in IGVs __tdf__ format, but to be compatible with `karyoploteR` they must first be converted to __bedgraph__, and then finally to __bigwig__ using [convert_tdf2bedgraph2bigwig.sh](ChIP/convert_tdf2bedgraph2bigwig.sh) (which itself calls [bdg2bw.sh](ChIP/bdg2bw.sh) taken from this [Gist](https://gist.github.com/taoliu/2469050))
 
-Example for Mmp14:<BR>
-<IMG SRC="ChIP/CTR_mz205_0007.ChIP.Mmp14.png" width=400px>
+For the paper ChIP figure Mmp2 and Mmp14, IGV was used so the TDF format tracks could be normalised to give RPM (reads per million)<BR>
 
+| Mmp   | ChIP Track Figure                          | PDF | SVG |
+| ----- | ------------------------------------------ | --- | --- |
+| Mmp2 | <IMG SRC="ChIP/Mmp2_igv.png" width=250px>   | [[Mmp2_igv.pdf](ChIP/Mmp2_igv.pdf)] | [[Mmp2_igv.svg](ChIP/Mmp2_igv.svg)]|
+| Mmp14 | <IMG SRC="ChIP/Mmp14_igv.png" width=250px> | [[Mmp14_igv.pdf](ChIP/Mmp14_igv.pdf)] | [[Mmp14_igv.svg](ChIP/Mmp14_igv.svg)] |
+
+<P><BR>
+
+KaryoploteR versions of the ChIP plots. Note these have not been normalised to RPM values.
 
 | Mmp   | ChIP Track Figure             |
 | ----- | ----------------------------- |
