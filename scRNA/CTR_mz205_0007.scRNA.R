@@ -79,8 +79,11 @@ dim(read_tab)
 #dim(read_tab)
 
 
-message("Read in read file in to Seurat and run tSNE clustering to identify EPI cells")
 
+
+#
+# message("Read in read file in to Seurat and run tSNE clustering to identify EPI cells")
+#
 matrix.su <- CreateSeuratObject(rpkm_tab, project = "cheng_et_al", min.cells = 3, min.features=3)
 matrix.su <- NormalizeData(matrix.su, normalization.method = "LogNormalize", scale.factor = 10000)
 matrix.su <- FindVariableFeatures(matrix.su, selection.method = "vst", nfeatures = 3000)
@@ -97,46 +100,45 @@ matrix.su <- FindNeighbors(matrix.su, dims = 1:5)
 matrix.su <- FindClusters(matrix.su, resolution = 0.2)
 matrix.su <- RunUMAP(matrix.su, dims = 1:5)
 
-plt.dim   <- DimPlot(matrix.su, reduction = "umap", label = TRUE, pt.size = 0.5) + NoLegend() + 
-                     theme(text=element_text(size=12,  family="sans"),
+plt.dim   <- DimPlot(matrix.su, reduction = "umap", label = TRUE, pt.size = 0.5) + #NoLegend() + 
+                     xlab("UMAP 1") + ylab("UMAP 2") +
+                     theme(aspect.ratio=1,
+                           text=element_text(size=12,  family="sans"),
                            axis.text.x=element_text(size=8), axis.text.y=element_text(size=8), 
-                           axis.title.x=element_text(size=8), axis.title.y=element_text(size=8))
+                           axis.title.x=element_text(size=8), axis.title.y=element_text(size=8),
+                           legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines") )
 
 plt.ftrs <- FeaturePlot(matrix.su, cols=c("blue","lightgrey","red"), features = c("Pou5f1","Bmp4","Amn"), 
                         pt.size = 0.25, reduction="umap", combine=F) 
 plt.ftrs <- lapply(X = plt.ftrs, FUN = function(x) x + 
-                       theme(plot.title=element_text(size = 10), legend.text=element_text(size=4),
+                       xlab("UMAP 1") + ylab("UMAP 2") +
+                       theme(aspect.ratio=1,
+                             plot.title=element_text(size = 10), legend.text=element_text(size=4),
                              axis.text.x=element_text(size=8), axis.text.y=element_text(size=8), 
                              axis.title.x=element_text(size=8), axis.title.y=element_text(size=8),
                              legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines") ))
-plt.ftr  <- CombinePlots(plots = plt.ftrs, ncol=1)
+plt.ftr  <- CombinePlots(plots = plt.ftrs, ncol=3)
                         
 new.cluster.ids        <- c("EPI", "ExE", "EPI", "VE", "VE", "VE", "EPI", "EPI")
 names(new.cluster.ids) <- levels(matrix.su)
 matrix.su              <- RenameIdents(matrix.su, new.cluster.ids)
-plt.dim.lab            <- DimPlot(matrix.su, reduction = "umap", label = TRUE, pt.size = 0.5) + NoLegend() + 
-                                  theme(text=element_text(size=12,  family="sans"),
+plt.dim.lab            <- DimPlot(matrix.su, reduction = "umap", label = TRUE, pt.size = 0.5) + #NoLegend() + 
+                                  xlab("UMAP 1") + ylab("UMAP 2") +
+                                  theme(aspect.ratio=1,
+                                        text=element_text(size=12,  family="sans"),
                                         axis.text.x=element_text(size=8), axis.text.y=element_text(size=8), 
                                         axis.title.x=element_text(size=8), axis.title.y=element_text(size=8))
 
-plt.dims               <- plot_grid(plt.dim, plt.dim.lab, ncol=1, labels = c("A", "C"))
-plt.dim.red            <- plot_grid(plt.dims, plt.ftr, ncol=2, labels = c("", "B"))
+plt.dims               <- plot_grid(plt.dim, plt.dim.lab, NULL, ncol=3, labels = c("A", "B", ""))
+plt.dim.red            <- plot_grid(plt.dims, plt.ftr, nrow=2, labels = c("", "C"))
 
-pdf(paste0(Project, "_scUMAPs", ".pdf"), width=5,height=5)
+pdf(paste0(Project, "_scUMAPs", ".pdf"), width=10,height=5)
 par(bg=NA)
 plt.dim.red
 dev.off()
 
-png(paste0(Project, "_scUMAPs", ".png"), units="cm", width=15, height=15, res=300)
-par(bg=NA)
-plt.dim.red 
-dev.off()
 
-
-
-
-#
-# Annotate the Cells with Ages
+#Anotate the Cells with Ages
 #
 cell.idents           <- as.data.frame(Idents(matrix.su))
 cell.idents$CellNames <- rownames(cell.idents)
@@ -166,6 +168,7 @@ table(matrix.umap$Age, matrix.umap$CellType)
 
 plt.age.all <- ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Age)) +
                geom_point(alpha=0.5, size=0.5) +
+               xlab("UMAP 1") + ylab("UMAP 2") +
                scale_colour_manual("", values = c("5.25"="blue", "5.5"="red", "6.25"="purple", "6.5"="green")) +
                theme(aspect.ratio=1, text = element_text(size=8), 
                      axis.text.x = element_text(size=6), axis.text.y = element_text(size=6), 
@@ -174,6 +177,7 @@ plt.age.all <- ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Age)) +
 
 plt.age.625 <- ggplot(matrix.umap, aes(x=UMAP_1, y=UMAP_2, colour=Age)) +
                geom_point(alpha=0.5, size=0.5) +
+               xlab("UMAP 1") + ylab("UMAP 2") +
                scale_colour_manual("", values = c("5.25"="grey", "5.5"="grey", "6.25"="purple", "6.5"="grey")) +
                theme(aspect.ratio=1, text = element_text(size=8), 
                      axis.text.x = element_text(size=6), axis.text.y = element_text(size=6), 
@@ -193,12 +197,17 @@ matrix.umap.m <- melt(matrix.umap, id=c("UMAP_1","UMAP_2","Age","CellType","seur
 head(matrix.umap.m)
 
 
-plt.all.Mmps <- ggplot(matrix.umap.m[ grep("Mmp", matrix.umap.m$variable), ], aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
-                geom_point(alpha=1, size=0.25) +
-                scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+plt.all.Mmps <- ggplot(matrix.umap.m[ grep("Mmp", matrix.umap.m$variable), ], aes(x=UMAP_1, y=UMAP_2, fill=value, colour=value, group=variable)) +
+                geom_point(alpha=1, size=0.5) +
+                xlab("UMAP 1") + ylab("UMAP 2") +
+                #scale_colour_gradient(name="RPKM", low="lightgrey", high="blue") +
+                #cale_colour_gradientn(colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(-0.5, 0.0, 0.01, 0.025, 3.25))) +
+  scale_color_gradient2(midpoint=1.0, low="grey", mid="lightgrey", high="red", space ="Lab" ) +
                 facet_wrap( ~variable, ncol=6) +
                 theme(aspect.ratio=1, text = element_text(size=8), 
                 axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
+plt.all.Mmps
+
 pdf(paste0(Project, "_scUMAPs.All.Mmp", ".pdf"), width=6,height=3)
 par(bg=NA)
 plt.all.Mmps
