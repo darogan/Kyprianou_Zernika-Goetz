@@ -84,11 +84,12 @@ dim(read_tab)
 #
 # message("Read in read file in to Seurat and run tSNE clustering to identify EPI cells")
 #
-matrix.su <- CreateSeuratObject(rpkm_tab, project = "cheng_et_al", min.cells = 3, min.features=3)
+#matrix.su <- CreateSeuratObject(rpkm_tab, project = "cheng_et_al", min.cells = 3, min.features=3)
+matrix.su <- CreateSeuratObject(read_tab, project = "cheng_et_al", min.cells = 1, min.features=1)
 matrix.su <- NormalizeData(matrix.su, normalization.method = "LogNormalize", scale.factor = 10000)
 matrix.su <- FindVariableFeatures(matrix.su, selection.method = "vst", nfeatures = 3000)
 
-matrix.su <- ScaleData(matrix.su, features = rownames(matrix.su) )#, do.scale=F)
+matrix.su <- ScaleData(matrix.su, features = rownames(matrix.su) , do.scale=F)
 
 matrix.su <- RunPCA(matrix.su, features = VariableFeatures(object = matrix.su))
 matrix.su <- JackStraw(matrix.su, num.replicate = 100)
@@ -98,18 +99,44 @@ matrix.su <- ScoreJackStraw(matrix.su, dims = 1:20)
 
 matrix.su <- FindNeighbors(matrix.su, dims = 1:5)
 matrix.su <- FindClusters(matrix.su, resolution = 0.2)
-matrix.su <- RunUMAP(matrix.su, dims = 1:5)
 
-plt.dim   <- DimPlot(matrix.su, reduction = "umap", label = TRUE, pt.size = 0.5) + #NoLegend() + 
+
+
+# tSNE
+# matrix.su   <- RunTSNE(matrix.su, dims = 1:5, perplexity=100)
+# plt.dim.t   <- DimPlot(matrix.su, reduction = "tsne", label = TRUE, pt.size = 0.5) +
+#                      xlab("tSNE 1") + ylab("tSNE 2") +
+#                      theme(aspect.ratio=1,
+#                      text=element_text(size=12,  family="sans"),
+#                      axis.text.x=element_text(size=8), axis.text.y=element_text(size=8), 
+#                      axis.title.x=element_text(size=8), axis.title.y=element_text(size=8),
+#                      legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines") )
+# 
+# plt.ftrs.t <- FeaturePlot(matrix.su, cols=c("blue","lightgrey","red"), features = c("Pou5f1","Bmp4","Amn"), 
+#                                              pt.size = 0.25, reduction="tsne", combine=F) 
+# plt.ftrs.t <- lapply(X = plt.ftrs.t, FUN = function(x) x + 
+#                      xlab("tSNE 1") + ylab("tSNE 2") +
+#                      theme(aspect.ratio=1,
+#                      plot.title=element_text(size = 10), legend.text=element_text(size=4),
+#                      axis.text.x=element_text(size=8), axis.text.y=element_text(size=8), 
+#                      axis.title.x=element_text(size=8), axis.title.y=element_text(size=8),
+#                      legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines") ))
+# plt.ftr.t  <- CombinePlots(plots = plt.ftrs.t, ncol=3)                     
+     
+               
+# UMAP
+matrix.su <- RunUMAP(matrix.su, dims = 1:5, min.dist=0.5)
+plt.dim   <- DimPlot(matrix.su, reduction = "umap", label = TRUE, pt.size = 0.5) + 
                      xlab("UMAP 1") + ylab("UMAP 2") +
                      theme(aspect.ratio=1,
                            text=element_text(size=12,  family="sans"),
                            axis.text.x=element_text(size=8), axis.text.y=element_text(size=8), 
                            axis.title.x=element_text(size=8), axis.title.y=element_text(size=8),
+                           legend.position = "none",
                            legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines") )
 
 plt.ftrs <- FeaturePlot(matrix.su, cols=c("blue","lightgrey","red"), features = c("Pou5f1","Bmp4","Amn"), 
-                        pt.size = 0.25, reduction="umap", combine=F) 
+                        pt.size = 0.5, reduction="umap", combine=F) 
 plt.ftrs <- lapply(X = plt.ftrs, FUN = function(x) x + 
                        xlab("UMAP 1") + ylab("UMAP 2") +
                        theme(aspect.ratio=1,
@@ -118,25 +145,38 @@ plt.ftrs <- lapply(X = plt.ftrs, FUN = function(x) x +
                              axis.title.x=element_text(size=8), axis.title.y=element_text(size=8),
                              legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines") ))
 plt.ftr  <- CombinePlots(plots = plt.ftrs, ncol=3)
+
+
+
                         
-new.cluster.ids        <- c("EPI", "ExE", "EPI", "VE", "VE", "VE", "EPI", "EPI")
+new.cluster.ids        <- c("EPI", "VE", "EPI", "ExE", "VE", "EPI", "VE", "VE")
 names(new.cluster.ids) <- levels(matrix.su)
 matrix.su              <- RenameIdents(matrix.su, new.cluster.ids)
 plt.dim.lab            <- DimPlot(matrix.su, reduction = "umap", label = TRUE, pt.size = 0.5) + #NoLegend() + 
-                                  xlab("UMAP 1") + ylab("UMAP 2") +
+                                  xlab("UMAP 1") + ylab("UMAP 2") + ggtitle("scRNA") + ylim(NA,10) +
                                   theme(aspect.ratio=1,
-                                        text=element_text(size=12,  family="sans"),
+                                        text=element_text(size=10,  family="sans"),
+                                        plot.title=element_text(size = 10), legend.text=element_text(size=4),
                                         axis.text.x=element_text(size=8), axis.text.y=element_text(size=8), 
-                                        axis.title.x=element_text(size=8), axis.title.y=element_text(size=8))
+                                        axis.title.x=element_text(size=8), axis.title.y=element_text(size=8),
+                                        legend.position="none",
+                                        legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines") ) 
 
 plt.dims               <- plot_grid(plt.dim, plt.dim.lab, NULL, ncol=3, labels = c("A", "B", ""))
 plt.dim.red            <- plot_grid(plt.dims, plt.ftr, nrow=2, labels = c("", "C"))
 
-pdf(paste0(Project, "_scUMAPs", ".pdf"), width=10,height=5)
-par(bg=NA)
-plt.dim.red
-dev.off()
+#pdf(paste0(Project, "_scUMAPs", ".pdf"), width=10,height=5)
+#par(bg=NA)
+#plt.dim.red
+#dev.off()
 
+plt.dim.fig            <- plot_grid(plt.dim.lab, plt.ftr, nrow=1, rel_widths = c(1,3.72))
+plt.dim.fig
+
+pdf(paste0(Project, "_scUMAPs", ".pdf"), width=10,height=3)
+par(bg=NA)
+plt.dim.fig
+dev.off()
 
 #Anotate the Cells with Ages
 #
@@ -197,18 +237,19 @@ matrix.umap.m <- melt(matrix.umap, id=c("UMAP_1","UMAP_2","Age","CellType","seur
 head(matrix.umap.m)
 
 
-plt.all.Mmps <- ggplot(matrix.umap.m[ grep("Mmp", matrix.umap.m$variable), ], aes(x=UMAP_1, y=UMAP_2, fill=value, colour=value, group=variable)) +
-                geom_point(alpha=1, size=0.5) +
+plt.all.Mmps <- ggplot(matrix.umap.m[ grep("Mmp", matrix.umap.m$variable), ], aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
+                geom_point(alpha=0.99, size=0.05) +
                 xlab("UMAP 1") + ylab("UMAP 2") +
-                #scale_colour_gradient(name="RPKM", low="lightgrey", high="blue") +
-                #cale_colour_gradientn(colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(-0.5, 0.0, 0.01, 0.025, 3.25))) +
-  scale_color_gradient2(midpoint=1.0, low="grey", mid="lightgrey", high="red", space ="Lab" ) +
+                scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(-0.5, 0.0, 0.01, 0.025, 3.25))) +
+                #scale_colour_gradientn(colours = c("blue", "lightgrey", "red"), values = scales::rescale(c(-0.5, 0.0, 0.01, 1.5, 2.0))) +
+                #scale_colour_gradient2(name="Expression", midpoint=0.99, low="blue", mid="lightgrey", high="red", space ="Lab" ) +
                 facet_wrap( ~variable, ncol=6) +
                 theme(aspect.ratio=1, text = element_text(size=8), 
-                axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
+                      legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines"),
+                       axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
 plt.all.Mmps
 
-pdf(paste0(Project, "_scUMAPs.All.Mmp", ".pdf"), width=6,height=3)
+pdf(paste0(Project, "_scUMAPs.All.Mmp", ".pdf"), width=8,height=4)
 par(bg=NA)
 plt.all.Mmps
 dev.off()
@@ -216,9 +257,11 @@ dev.off()
 plt.main.Mmps <- ggplot( subset(matrix.umap.m, variable == "Mmp2" | variable == "Mmp14" | variable == "Mmp25"), 
                          aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
                  geom_point(alpha=1, size=0.25) +
-                 scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+                 #scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+                 scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(0, 10, 15, 33, 100)) ) +
                  facet_wrap( ~variable, nrow=1) +
                  theme(aspect.ratio=1, text = element_text(size=8), 
+                       legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines"),
                        axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
 pdf(paste0(Project, "_scUMAPs.Main.Mmp", ".pdf"), width=5,height=2)
 par(bg=NA)
@@ -349,6 +392,9 @@ test.data.ann <- merge(test.data, sample2age, by="Sample")
 rownames(test.data.ann) <- test.data.ann$Sample
 head(test.data.ann)
 
+test.data.ann <- subset(test.data.ann, Age=="6.25" | Age=="6.5")
+head(test.data.ann)
+
 
 get_density <- function(x, y, n = 100) {
   dens <- MASS::kde2d(x = x, y = y, n = n)
@@ -360,24 +406,24 @@ get_density <- function(x, y, n = 100) {
 
 functionPlotMmpVsMarkerCorrelations <- function(test.data.ann, mmpGene, markerGene, varXmax, varYmax, varScalemax) {
   
-cor5.25 <- cor.test(subset(test.data.ann[, c(markerGene, "Age")], Age==5.25)[,c(markerGene)], 
-                    subset(test.data.ann[, c(mmpGene,    "Age")], Age==5.25)[,c(mmpGene)], method="pearson")
-cor5.50 <- cor.test(subset(test.data.ann[, c(markerGene, "Age")], Age==5.5 )[,c(markerGene)], 
-                    subset(test.data.ann[, c(mmpGene,    "Age")], Age==5.5 )[,c(mmpGene)], method="pearson")
+#cor5.25 <- cor.test(subset(test.data.ann[, c(markerGene, "Age")], Age==5.25)[,c(markerGene)], 
+#                    subset(test.data.ann[, c(mmpGene,    "Age")], Age==5.25)[,c(mmpGene)], method="pearson")
+#cor5.50 <- cor.test(subset(test.data.ann[, c(markerGene, "Age")], Age==5.5 )[,c(markerGene)], 
+#                    subset(test.data.ann[, c(mmpGene,    "Age")], Age==5.5 )[,c(mmpGene)], method="pearson")
 cor6.25 <- cor.test(subset(test.data.ann[, c(markerGene, "Age")], Age==6.25)[,c(markerGene)], 
                     subset(test.data.ann[, c(mmpGene,    "Age")], Age==6.25)[,c(mmpGene)], method="pearson")
 cor6.50 <- cor.test(subset(test.data.ann[, c(markerGene, "Age")], Age==6.5 )[,c(markerGene)], 
                     subset(test.data.ann[, c(mmpGene,    "Age")], Age==6.5 )[,c(mmpGene)], method="pearson")
 
-labels <- c( "5.25"=paste("5.25 \n[ r=", signif(cor5.25$estimate,2), " p=", signif(cor5.25$p.value,2),"]"), 
-             "5.5"=paste("5.5  \n[ r=",  signif(cor5.50$estimate,2), " p=", signif(cor5.50$p.value,2),"]"),
-             "6.25"=paste("6.25 \n[ r=", signif(cor6.25$estimate,2), " p=", signif(cor6.25$p.value,2),"]"),
-             "6.5"=paste("6.5  \n[ r=",  signif(cor6.50$estimate,2), " p=", signif(cor6.50$p.value,2),"]") )
+labels <- c( #"5.25"=paste("5.25 \n[ r=", signif(cor5.25$estimate,2), " p=", signif(cor5.25$p.value,2),"]"), 
+             #"5.5"=paste("5.5  \n[ r=",  signif(cor5.50$estimate,2), " p=", signif(cor5.50$p.value,2),"]"),
+             "6.25"=paste("6.25 \nr=", signif(cor6.25$estimate,2), " p=", signif(cor6.25$p.value,2)),
+             "6.5"=paste("6.5  \nr=",  signif(cor6.50$estimate,2), " p=", signif(cor6.50$p.value,2)) )
 
 
 message(paste("", mmpGene, markerGene,  
-               signif(cor5.25$estimate,2), signif(cor5.25$p.value,2),
-               signif(cor5.50$estimate,2), signif(cor5.50$p.value,2), 
+             #  signif(cor5.25$estimate,2), signif(cor5.25$p.value,2),
+             #  signif(cor5.50$estimate,2), signif(cor5.50$p.value,2), 
                signif(cor6.25$estimate,2), signif(cor6.25$p.value,2), 
                signif(cor6.50$estimate,2), signif(cor6.50$p.value,2), "", sep=" | "))
 
@@ -391,17 +437,18 @@ plot <-   ggplot(test.data.ann, aes(x=log2(test.data.ann[,c(markerGene)]+1), y=l
           #scale_colour_viridis() +
           scale_colour_gradientn(colors=viridis_pal()(9), limits=c(0,varScalemax), 
                                  breaks=seq(0,varScalemax,0.05), na.value = "#FDE725FF") + 
-          xlim(0,varXmax) + ylim(0,varYmax) +
+          scale_x_continuous(breaks=seq(0,15,5), limits=c(0,12.5)) + #xlim(0,varXmax) + 
+          scale_y_continuous(breaks=seq(0,15,5), limits=c(0,12.5)) + #ylim(0,varYmax) +
           xlab(paste0(markerGene, " log2(RPKM+1)")) +
           ylab(paste0(mmpGene, " log2(RPKM+1)")) +
-          geom_point(alpha=0.75, size=2) +
+          geom_point(alpha=0.75, size=1.5) +
           facet_grid( ~Age, labeller = labeller(Age = labels) ) +
           coord_equal() +
           theme(text=element_text(size=10,  family="sans"), 
                 axis.text.x = element_text(size=8), #angle = 45, hjust = 1),
                 axis.text.y = element_text(size=8),
                 strip.text.x = element_text(size=8, face="bold"),
-                legend.text=element_text(size=6),
+                legend.text=element_text(size=5),
                 legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.2, "lines")
             )
 
@@ -428,7 +475,7 @@ for (i in seq(1, (length(MMPs)-4), 1))
   p4 <- functionPlotMmpVsMarkerCorrelations(test.data.ann, MMPs[i], "Tdgf1", varXmax=12, varYmax=12, varScalemax=0.125)  
   pX <- plot_grid(p1, p2, p3, p4, ncol=1)
   
-  pdf(paste0(Project, "_", MMPs[i],".pdf"), width=7,height=6)
+  pdf(paste0(Project, "_", MMPs[i],".pdf"), width=4,height=8)
   par(bg=NA)
   print(pX)
   dev.off()

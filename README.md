@@ -65,11 +65,12 @@ For all ages (5.25, 5.5, 6.25 and 6.5) unless stated otherwise.
 | Genes | UMAP    | PDF |
 | ----- | ------- | --- |
 | All Mmp genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.pdf)]     |
-| Mmp2, Mmp14, MMp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.pdf)]  |
-| At 6.25 Only: Mmp2, Mmp14, MMp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.6.25.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.6.25.pdf)]  |
+| Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.pdf)]  |
+| At 6.25 Only: Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.pdf)]  |
 | Marker Genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Markers.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Markers.pdf)]     |
 | Laminins | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Laminins.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Laminins.pdf)]   |
 | Collagens | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Collagens.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Collagens.pdf)] |
+
 
 
 #### Summarise Gene Level UMAPs
