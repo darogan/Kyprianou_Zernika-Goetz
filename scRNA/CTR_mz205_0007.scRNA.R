@@ -239,7 +239,7 @@ head(matrix.umap.m)
 
 plt.all.Mmps <- ggplot(matrix.umap.m[ grep("Mmp", matrix.umap.m$variable), ], aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
                 geom_point(alpha=0.99, size=0.05) +
-                xlab("UMAP 1") + ylab("UMAP 2") +
+                xlab("UMAP 1") + ylab("UMAP 2") + ylim(NA,10) +
                 scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(-0.5, 0.0, 0.01, 0.025, 3.25))) +
                 #scale_colour_gradientn(colours = c("blue", "lightgrey", "red"), values = scales::rescale(c(-0.5, 0.0, 0.01, 1.5, 2.0))) +
                 #scale_colour_gradient2(name="Expression", midpoint=0.99, low="blue", mid="lightgrey", high="red", space ="Lab" ) +
@@ -256,7 +256,7 @@ dev.off()
 
 plt.main.Mmps <- ggplot( subset(matrix.umap.m, variable == "Mmp2" | variable == "Mmp14" | variable == "Mmp25"), 
                          aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
-                 geom_point(alpha=1, size=0.25) +
+                 geom_point(alpha=1, size=0.25) + ylim(NA,10) +
                  #scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
                  scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(0, 10, 15, 33, 100)) ) +
                  facet_wrap( ~variable, nrow=1) +
@@ -269,90 +269,103 @@ plt.main.Mmps
 dev.off()
 
 plt.main.Mmps.625 <- ggplot() +
-                     geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "Mmp2" | variable == "Mmp14")), 
+                     geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "Mmp2" | variable == "Mmp14" | variable == "Mmp25") ), 
                                 aes(x=UMAP_1, y=UMAP_2), colour="lightgrey", alpha=1, size=0.5, show.legend=F) +
                      geom_point( data=subset(matrix.umap.m, 
-                                             CellType== "EPI" & Age>=6 & (variable == "Mmp2" | variable == "Mmp14")), 
+                                             CellType== "EPI" & Age>=6 & (variable == "Mmp2" | variable == "Mmp14" | variable == "Mmp25")), 
                                  aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable), alpha=1, size=0.5) +
-                     scale_colour_gradient2(name="RPKM", low="blue", mid="blue", high="red") +
-                     xlim(-2.5,NA) +  ylim(NA,2.5) + xlab("UMAP 1") + ylab("UMAP 2") +
-                     facet_wrap( ~variable, nrow=2) +
-                     #ggtitle("Epiblast cells Age 6.25 & 6.5") +
+                     #scale_colour_gradient2(name="Expression", low="blue", mid="blue", high="red") +
+                     scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(0, 10, 15, 33, 100)) ) +
+                     xlim(-0.2,10) +  ylim(-10,10) + xlab("UMAP 1") + ylab("UMAP 2") + coord_fixed() +
+                     facet_wrap( ~variable, nrow=1) +
+                     #ggtitle("Epiblast cells Age 6.25 & 6.5") + 
                      theme(aspect.ratio=1, text = element_text(size=8), plot.title =  element_text(size=8),
                            axis.text.x = element_text(size=6), axis.text.y = element_text(size=6),
                            legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines") )
 plt.main.Mmps.625
 
-pdf(paste0(Project, "_scUMAPs.Main.Mmp.EPI.6.plus", ".pdf"), width=6,height=2.5)
+pdf(paste0(Project, "_scUMAPs.Main.Mmp.EPI.6.plus", ".pdf"), width=6,height=2)
 par(bg=NA)
 plt.main.Mmps.625
 dev.off()
 
 
+
+
+
 plt.main.Mark <- ggplot( subset(matrix.umap.m, variable == "T" | variable == "Nodal" | variable == "Otx2" | variable == "Fam25c"), 
                          aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
-  geom_point(alpha=1, size=0.25) +
-  scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
-  facet_wrap( ~variable, nrow=1) +
-  theme(aspect.ratio=1, text = element_text(size=8), 
-        axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
-pdf(paste0(Project, "_scUMAPs.Markers", ".pdf"), width=5,height=2)
+                 geom_point(alpha=1, size=0.25) +
+                 #scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+                 scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(0, 10, 15, 33, 100)) ) +
+                 facet_wrap( ~variable, nrow=1) +
+                 theme(aspect.ratio=1, text = element_text(size=8), 
+                 axis.text.x = element_text(size=6), axis.text.y = element_text(size=6),
+                 legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines") )
+pdf(paste0(Project, "_scUMAPs.Markers", ".pdf"), width=6,height=2)
 par(bg=NA)
 plt.main.Mark
 dev.off()
 
 plt.main.Mark.625 <- ggplot() +
-  geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "T" | variable == "Nodal" | variable == "Tdgf1")), 
-             aes(x=UMAP_1, y=UMAP_2), colour="lightgrey", alpha=1, size=0.1, show.legend=F) +
-  geom_point( data=subset(matrix.umap.m, 
-                          CellType== "EPI" & Age>=6 & (variable == "T" | variable == "Nodal" | variable == "Tdgf1")), 
-              aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable), alpha=1, size=0.1) +
-  scale_colour_gradient2(name="RPKM", low="blue", mid="blue", high="red") +
-  xlim(-2.5,NA) +  ylim(NA,2.5) +
-  xlab("") + ylab("") +
-  facet_wrap( ~variable, nrow=3) +
-  theme(aspect.ratio=1, text = element_text(size=8), plot.title =  element_text(size=8), line = element_blank(),
-        axis.text.x = element_blank(), axis.text.y = element_blank(),
-        legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines") )
+                     geom_point(data=subset(matrix.umap.m, CellType== "EPI" & (variable == "T" | variable == "Nodal" | variable == "Tdgf1")), 
+                                aes(x=UMAP_1, y=UMAP_2), colour="lightgrey", alpha=1, size=0.5, show.legend=F) +
+                     geom_point(data=subset(matrix.umap.m, 
+                                CellType== "EPI" & Age>=6 & (variable == "T" | variable == "Nodal" | variable == "Tdgf1")), 
+                                aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable), alpha=1, size=0.5) +
+                     #scale_colour_gradient2(name="RPKM", low="blue", mid="blue", high="red") +
+                     scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(0, 10, 15, 33, 100)) ) +
+                     xlim(-0.2,NA) +  ylim(-10,10) +
+                     xlab("UMAP 1") + ylab("") +
+                     facet_wrap( ~variable, nrow=1) +
+                     #theme(aspect.ratio=1, text = element_text(size=8), plot.title =  element_text(size=8), line = element_blank(),
+                     #      axis.text.x = element_blank(), axis.text.y = element_blank(),
+                     #      legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines") )
+                     theme(aspect.ratio=1, text = element_text(size=8), plot.title =  element_text(size=8),
+                           axis.text.x = element_text(size=6), axis.text.y = element_text(size=6),
+                           legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines") )
 plt.main.Mark.625
 
 
-pdf(paste0(Project, "_scUMAPs.Figure", ".pdf"), width=5,height=4)
+pdf(paste0(Project, "_scUMAPs.Figure", ".pdf"), width=6,height=4)
 par(bg=NA)
-plot_grid(plt.main.Mmps.625, plt.main.Mark.625, ncol=2, rel_widths=c(1,.75))
+plot_grid(plt.main.Mmps.625, plt.main.Mark.625, ncol=1, rel_widths=c(1,1))
 dev.off()
 
 
 
 plt.all.Lams <- ggplot( subset(matrix.umap.m, grepl("Lam", variable)), aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
-  geom_point(alpha=1, size=0.25) +
-  scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+  geom_point(alpha=1, size=0.25) + ylim(NA,10) +
+  #scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+  scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(0, 10, 15, 33, 100)) ) +
   facet_wrap( ~variable, ncol=6) +
   theme(aspect.ratio=1, text = element_text(size=8), 
-        axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
-pdf(paste0(Project, "_scUMAPs.Laminins", ".pdf"), width=5,height=2)
+        axis.text.x = element_text(size=6), axis.text.y = element_text(size=6),
+        legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines"))
+pdf(paste0(Project, "_scUMAPs.Laminins", ".pdf"), width=6,height=2)
 par(bg=NA)
 plt.all.Lams
 dev.off()
 
 
 plt.all.Cols <- ggplot( subset(matrix.umap.m, grepl("Col", variable)), aes(x=UMAP_1, y=UMAP_2, colour=value, group=variable)) +
-  geom_point(alpha=1, size=0.25) +
-  scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+  geom_point(alpha=1, size=0.25) + ylim(NA,10) +
+  #scale_colour_gradient(name="RPKM", low="lightgrey", high="red") +
+  scale_colour_gradientn(name="Expression", colours = c("lightgrey", "grey", "red"), values = scales::rescale(c(0, 10, 15, 33, 100)) ) +
   facet_wrap( ~variable, ncol=6) +
   theme(aspect.ratio=1, text = element_text(size=8), 
-        axis.text.x = element_text(size=6), axis.text.y = element_text(size=6) )
-pdf(paste0(Project, "_scUMAPs.Collagens", ".pdf"), width=5,height=2)
+        axis.text.x = element_text(size=6), axis.text.y = element_text(size=6),
+        legend.key.height=unit(0.5, "lines"), legend.key.width=unit(0.3, "lines"))
+pdf(paste0(Project, "_scUMAPs.Collagens", ".pdf"), width=6,height=2)
 par(bg=NA)
 plt.all.Cols
 dev.off()
 
 
 
-
-
-
-
+#
+# Correlation Plots
+#
 
 
 EPI.cells.use <- WhichCells(object = matrix.su, idents = 'EPI')

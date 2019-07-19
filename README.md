@@ -8,15 +8,17 @@
 
 * Cheng, S., Pei, Y., He, L., Peng, G., Reinius, B., Tam, P.P.L, Jing, N. and Deng, Q. (2019) Single-Cell {RNA}-Seq Reveals Cellular Heterogeneity of Pluripotency Transition and X Chromosome Dynamics during Early Mouse Development. Cell Reports. 26:10, 2593--2607.e3. [[DOI](https://doi.org/10.1016/j.celrep.2019.02.031)]
 
-Download supplimental files from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071)
+Download supplemental files from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071)
 
 * [GSE109071_read.txt](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE109071&format=file&file=GSE109071%5Fread%2Etxt%2Egz)
 * [GSE109071_rpkm.txt](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE109071&format=file&file=GSE109071%5Frpkm%2Etxt%2Egz)
 * [GSE109071_series_matrix.txt](http://ftp.ncbi.nlm.nih.gov/geo/series/GSE109nnn/GSE109071/matrix/GSE109071_series_matrix.txt.gz)
 
-Using the R script [CTR_mz205_0007.scRNA.R](scRNA/CTR_mz205_0007.scRNA.R) to first cluster and plot a dimensional reduction (UMAP) of the scRNA-seq data (note the original paper used tSNE). To identify the Epiblast cells _Pou5f1_ was used as a marker. Clusters excluded from further analysis are the ExE (marker = _Bmp4_) and VE (marker = _Amn_). The figure below shows: __A.__ Finding clusters, __B.__ cluster identification using markers and __C.__ Labelling identified clusters.
+__Text for Methods__: Re-analysis of the [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071) dataset was performed using R (v3.4.4) and Seurat (v3.0.1). The matrix of read counts was input into Seurat, normalised (log), and scaled. Three thousand variable genes were used to identify clusters. Dimensional reduction was performed using UMAP. Cell identifiers were parsed from the GEO entry and added to the Seurat Object using ( make_sample2Age_table.sh). All expression values are log(counts). Marker genes were used to identify the Epiblast (_Pou5f1_), ExE (_Bmp4_) and VE (_Amn_) cells in the UMAP. Steps to recreate analysis and figures can be found in the R script [CTR_mz205_0007.scRNA.R](scRNA/CTR_mz205_0007.scRNA.R)
 
 <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.png" width=400px>
+
+__Legend__: Marker genes were used to identify the Epiblast (_Pou5f1_), ExE (_Bmp4_) and VE (_Amn_) cells in the UMAP.
 
 __Download Figure__:  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] [[PNG](scRNA/CTR_mz205_0007_scUMAPs.png)]
 
@@ -62,20 +64,23 @@ __Download Figure__:  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Ages.pdf)] [[PNG](scRN
 
 For all ages (5.25, 5.5, 6.25 and 6.5) unless stated otherwise.
 
-| Genes | UMAP    | PDF |
-| ----- | ------- | --- |
-| All Mmp genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.pdf)]     |
-| Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.pdf)]  |
-| At 6.25 Only: Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.pdf)]  |
-| Marker Genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Markers.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Markers.pdf)]     |
-| Laminins | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Laminins.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Laminins.pdf)]   |
-| Collagens | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Collagens.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Collagens.pdf)] |
+| Genes | UMAP    | PDF | Legend |
+| ----- | ------- | --- | ------ |
+| All Mmp genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.pdf)]     | Expression levels for all available Mmp genes are plotted on the UMAP for all cell types. All expression values are log(counts). |
+| Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.pdf)]  | As above but just for Mmp2, Mmp14 and Mmp25 |
+| At 6.25 Only: Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.pdf)]  | As above but the UMAP has been zoomed in to only show the Epiblase cluster. |
+| Marker Genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Markers.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Markers.pdf)]     | As above but for known marker genes T, Otx2, Nodal and Fam25c. |
+| Laminins | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Laminins.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Laminins.pdf)]   | As above but for the Laminin genes (Lama1, Lama5, Lamb1, Lamc1)
+| Collagens | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Collagens.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Collagens.pdf)] | As above but for the Collagen genes (Col18a1, Col4a1, Col9a3) |
 
 
 
 #### Summarise Gene Level UMAPs
 
 <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Figure.png" width=600px><BR>
+
+__Legend__: Expression levels for Mmp genes (Mmp2, Mmp14 & Mmp25) and known marker genes (T, Nodal, Tdgf1) are plotted on the UMAP for just the Epiblast cell types identified in Figure __N=?__. All expression values are log(counts).
+
 __Download Figure__: [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Figure.pdf)] [[CTR_mz205_0007_scUMAPs.Figure.png](scRNA/CTR_mz205_0007_scUMAPs.Figure.png)]
 
 ### Step 2: Analyse expression for Mmp genes in published scRNA-seq data
@@ -140,6 +145,8 @@ After extraction of the Epiblast cells from the scRNA-seq the next step is to pl
 
 Example for Mmp14:<BR>
 <IMG SRC="scRNA/CTR_mz205_0007_Mmp14.png" width=400px>
+
+__Legend__: The matrix of RPKM values from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071) was used to calculate gene expression correlation between pairs of genes. Epiblast cells at ages 6.25 and 6.5 were extracted from the matrix and  Pearson's correlation coefficient (R) with p-value are given for each comparison. The points are coloured by density (kde2d).
 
 | Mmp   | PNG | PDF  |
 | ----- | --- | ---- |
@@ -282,6 +289,8 @@ For the paper ChIP figure Mmp2 and Mmp14, IGV was used so the TDF format tracks 
 | ----- | ------------------------------------------ | --- | --- |
 | Mmp2 | <IMG SRC="ChIP/Mmp2_igv.png" width=250px>   | [[Mmp2_igv.pdf](ChIP/Mmp2_igv.pdf)] | [[Mmp2_igv.svg](ChIP/Mmp2_igv.svg)]|
 | Mmp14 | <IMG SRC="ChIP/Mmp14_igv.png" width=250px> | [[Mmp14_igv.pdf](ChIP/Mmp14_igv.pdf)] | [[Mmp14_igv.svg](ChIP/Mmp14_igv.svg)] |
+
+__Legend__: ChIP tracks for Smad2_3 from [GSE70486](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70486) in TDF format were visualied in IGV (Integrative Genomics Viewer, 10.1038/nbt.1754) and signal intensities were normalised by 1x10^6/total reads to give RPM (Reads per million).
 
 <P><BR>
 
