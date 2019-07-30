@@ -6,7 +6,7 @@
 
 ### Step 1: Get expression for Mmp genes in published scRNA-seq data
 
-* Cheng, S., Pei, Y., He, L., Peng, G., Reinius, B., Tam, P.P.L, Jing, N. and Deng, Q. (2019) Single-Cell {RNA}-Seq Reveals Cellular Heterogeneity of Pluripotency Transition and X Chromosome Dynamics during Early Mouse Development. Cell Reports. 26:10, 2593--2607.e3. [[DOI](https://doi.org/10.1016/j.celrep.2019.02.031)]
+* Cheng, S., Pei, Y., He, L., Peng, G., Reinius, B., Tam, P.P.L, Jing, N. and Deng, Q. (2019) Single-Cell RNA-Seq Reveals Cellular Heterogeneity of Pluripotency Transition and X Chromosome Dynamics during Early Mouse Development. Cell Reports. 26:10, 2593--2607.e3. [[DOI](https://doi.org/10.1016/j.celrep.2019.02.031)]
 
 Download supplemental files from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071)
 
@@ -14,7 +14,16 @@ Download supplemental files from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/qu
 * [GSE109071_rpkm.txt](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE109071&format=file&file=GSE109071%5Frpkm%2Etxt%2Egz)
 * [GSE109071_series_matrix.txt](http://ftp.ncbi.nlm.nih.gov/geo/series/GSE109nnn/GSE109071/matrix/GSE109071_series_matrix.txt.gz)
 
-__Text for Methods__: Re-analysis of the [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071) dataset was performed using R (v3.4.4) and Seurat (v3.0.1). The matrix of read counts was input into Seurat, normalised (log), and scaled. Three thousand variable genes were used to identify clusters. Dimensional reduction was performed using UMAP. Cell identifiers were parsed from the GEO entry and added to the Seurat Object using ( make_sample2Age_table.sh). All expression values are log(counts). Marker genes were used to identify the Epiblast (_Pou5f1_), ExE (_Bmp4_) and VE (_Amn_) cells in the UMAP. Steps to recreate analysis and figures can be found in the R script [CTR_mz205_0007.scRNA.R](scRNA/CTR_mz205_0007.scRNA.R)
+__Text for Methods__:
+> Single Cell
+
+Re-analysis of the [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071)(from 10.1016/j.celrep.2019.02.031) dataset was performed using R (v3.4.4) and Seurat (v3.0.1). The matrix of read counts was input into Seurat, normalised (log), and scaled. Three thousand variable genes were used to identify clusters. Dimensional reduction was performed using UMAP. Cell identifiers were parsed from the GEO entry and added to the Seurat Object using ( make_sample2Age_table.sh). All expression values are log(counts). Marker genes were used to identify the Epiblast (_Pou5f1_), ExE (_Bmp4_) and VE (_Amn_) cells in the UMAP. The matrix of RPKM values from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071) was used to calculate gene expression correlation between pairs of selected genes. Epiblast cells at ages 6.25 and 6.5 were extracted from the matrix and Pearson's correlation coefficient (R) with p-value are given for each comparison. The points are coloured by density using a kde2d kernel. Scripts and data to recreate analysis and figures are available from [github.com/darogan/CTR_mz205_0007](http://github.com/darogan/CTR_mz205_0007)
+
+> ChIP-Seq
+
+ChIP tracks for Smad2_3 from [GSE70486](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70486)(from 10.1016/j.stem.2016.10.002) in TDF (tiled data file) format were visualised in IGV (Integrative Genomics Viewer, 10.1038/nbt.1754) and signal intensities were normalised by 1x10^6/total reads to give RPM (Reads per million). Scripts to recreate ChIP-Seq analysis and figures can be found at [github.com/darogan/CTR_mz205_0007](http://github.com/darogan/CTR_mz205_0007). Analysis was performed using R (v3.4.4).
+
+
 
 <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.png" width=400px>
 
