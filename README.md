@@ -1,12 +1,16 @@
 # Basement membrane remodelling regulates mammalian embryogenesis and gastrulation
 
-**Christos Kyprianou<sup>1,4</sup>, Neophytos Christodoulou<sup>1,4</sup>, Russell Hamilton<sup>3</sup>, Wallis Nahaboo<sup>2</sup>, Diana Suarez Boomgaard<sup>2</sup> ,Gianluca Amadei<sup>1</sup>, Isabelle Migeotte<sup>2</sup>, and Magdalena Zernicka-Goetz<sup>1,*</sup>**
+**Christos Kyprianou<sup>1,4</sup>, Neophytos Christodoulou<sup>1,4</sup>, Russell Hamilton<sup>3</sup>, Wallis Nahaboo<sup>2</sup>, Diana Suarez Boomgaard<sup>2</sup>, Gianluca Amadei<sup>1</sup>, Isabelle Migeotte<sup>2</sup>, and Magdalena Zernicka-Goetz<sup>1,*</sup>**
 
 <sup>1</sup> Mammalian Embryo and Stem Cell Group, University of Cambridge, Department of Physiology, Development and Neuroscience; Downing Street, Cambridge, CB2 3DY, UK <br>
 <sup>2</sup> IRIBHM, Université Libre de Bruxelles, Bruxelles, Belgium<br>
 <sup>3</sup> Department of Genetics, University of Cambridge, Cambridge, UK<br>
 <sup>4</sup> equal contribution<br>
 <sup>*</sup> corresponding author: mz205@cam.ac.uk<br>
+
+### Publication ###
+
+Kyprianou, C., Christodoulou, N., Hamilton, R.S., Nahaboo, W., Boomgaard, D., Amadei, G., Migeotte, I. & Zernicka-Goetz, M. [[<s>JOURNAL</s>]](https://) [[<s>DOI</s>]](https://doi.org/) (<i>to be updated on publication</i>)
 
 
 ## Investigating Mmp expression in scRNA-Seq
@@ -23,12 +27,10 @@ Download supplemental files from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/qu
 
 __Methods: Single Cell__
 
-Re-analysis of the [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071)(from 10.1016/j.celrep.2019.02.031) dataset was performed using R (v3.4.4) and Seurat (v3.0.1). The matrix of read counts was input into Seurat, normalised (log), and scaled. Three thousand variable genes were used to identify clusters. Dimensional reduction was performed using UMAP. Cell identifiers were parsed from the GEO entry and added to the Seurat Object using ( make_sample2Age_table.sh). All expression values are log(counts). Marker genes were used to identify the Epiblast (_Pou5f1_), ExE (_Bmp4_) and VE (_Amn_) cells in the UMAP. The matrix of RPKM values from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071) was used to calculate gene expression correlation between pairs of selected genes. Epiblast cells at ages 6.25 and 6.5 were extracted from the matrix and Pearson's correlation coefficient (R) with p-value are given for each comparison. The points are coloured by density using a kde2d kernel. Scripts and data to recreate analysis and figures are available from [github.com/darogan/CTR_mz205_0007](http://github.com/darogan/CTR_mz205_0007)
+Re-analysis of the [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071)(from 10.1016/j.celrep.2019.02.031) dataset was performed using R (v3.4.4) and Seurat (v3.0.1). The matrix of read counts was input into Seurat, normalised (log), and scaled. Three thousand variable genes were used to identify clusters. Dimensional reduction was performed using UMAP. Cell identifiers were parsed from the GEO entry and added to the Seurat Object using ( make_sample2Age_table.sh). All expression values are log(counts). Marker genes were used to identify the Epiblast (_Pou5f1_), ExE (_Bmp4_) and VE (_Amn_) cells in the UMAP. The matrix of RPKM values from [GSE109071](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109071) was used to calculate gene expression correlation between pairs of selected genes. Epiblast cells at ages 6.25 and 6.5 were extracted from the matrix and Pearson's correlation coefficient (R) with p-value are given for each comparison. The points are coloured by density using a kde2d kernel.
 
 
-
-
-| Figure 3C | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.png" width=600px>   |
+| Figure E4B | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.png" width=600px>   |
 | --------- | --- |
 | __Download__ | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.pdf)] |
 | __Legend__ |  Marker genes were used to identify the Epiblast (_Pou5f1_), ExE (_Bmp4_) and VE (_Amn_) cells in the UMAP.
@@ -70,7 +72,7 @@ Use bash script [make_sample2Age_table.sh](scRNA/make_sample2Age_table.sh) to ma
 
 > UMAP showing distribution of cells by age:
 
-| Figure E5A | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Ages.png" width=400px> |
+| Figure E4A | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Ages.png" width=400px> |
 | ------------ | ----- |
 | __Legend__ | UMAP showing distribution of cells by age |
 | __Download__ |  [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Ages.pdf)] |
@@ -81,18 +83,18 @@ For all ages (5.25, 5.5, 6.25 and 6.5) unless stated otherwise.
 
 | Figure Number | Genes | UMAP    | PDF | Legend |
 | ----------- | ----- | ------- | --- | ------ |
-| __Fig 3D__    | All Mmp genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.pdf)]     | Expression levels for all available Mmp genes are plotted on the UMAP for all cell types. All expression values are log(counts). |
+| __Fig E4C__    | All Mmp genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.All.Mmp.pdf)]     | Expression levels for all available Mmp genes are plotted on the UMAP for all cell types. All expression values are log(counts). |
 | -    | Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.pdf)]  | As above but just for Mmp2, Mmp14 and Mmp25 |
 | -    | At 6.25 Only: Mmp2, Mmp14, Mmp25 | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Main.Mmp.EPI.6.plus.pdf)]  | As above but the UMAP has been zoomed in to only show the Epiblase cluster. |
 | -    | Marker Genes | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Markers.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Markers.pdf)]     | As above but for known marker genes T, Otx2, Nodal and Fam25c. |
-| __Fig E3C (top)__ | Laminins | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Laminins.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Laminins.pdf)]   | As above but for the Laminin genes (Lama1, Lama5, Lamb1, Lamc1)
-| __Fig E3C (bottom)__ | Collagens | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Collagens.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Collagens.pdf)] | As above but for the Collagen genes (Col18a1, Col4a1, Col9a3) |
+| __Fig E5A (top)__ | Laminins | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Laminins.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Laminins.pdf)]   | As above but for the Laminin genes (Lama1, Lama5, Lamb1, Lamc1)
+| __Fig E5A (bottom)__ | Collagens | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Collagens.png" width=300px> | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Collagens.pdf)] | As above but for the Collagen genes (Col18a1, Col4a1, Col9a3) |
 
 
 
 #### Summarise Gene Level UMAPs
 
-| Figure 3E | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Figure.png" width=600px> |
+| Figure 3C | <IMG SRC="scRNA/CTR_mz205_0007_scUMAPs.Figure.png" width=600px> |
 | --------- | --------------------------------------------------------------- |
 | __Legend__ | Expression levels for Mmp genes (Mmp2, Mmp14 & Mmp25) and known marker genes (T, Nodal, Tdgf1) are plotted on the UMAP for just the Epiblast cell types identified in Figure __3C__. All expression values are log(counts). |
 | __Download__ | [[PDF](scRNA/CTR_mz205_0007_scUMAPs.Figure.pdf)] |
@@ -163,7 +165,7 @@ After extraction of the Epiblast cells from the scRNA-seq the next step is to pl
     <td><i>Gene</i></td><td><b>Mmp25</b></td><td><b>Mmp14</b></td><td><b>Mmp2</b></td>
   </tr>
   <tr>
-    <td><i>Figure Number</i></td><td><b>Fig E5B (left)</b></td><td><b>Fig E5B (center)</b></td><td><b>Fig E5B (right)</b></td>
+    <td><i>Figure Number</i></td><td><b>Fig E4F (left)</b></td><td><b>Fig E4F (center)</b></td><td><b>Fig E4F (right)</b></td>
   </tr>
   <tr>
     <td></td><td><IMG SRC="scRNA/CTR_mz205_0007_Mmp25.png" width=300px> </td><td> <IMG SRC="scRNA/CTR_mz205_0007_Mmp14.png" width=300px> </td><td> <IMG SRC="scRNA/CTR_mz205_0007_Mmp21.png" width=300px> </td>
@@ -321,8 +323,8 @@ ChIP tracks for Smad2_3 from [GSE70486](https://www.ncbi.nlm.nih.gov/geo/query/a
 
 | Mmp   | ChIP Track Figure                          | Paper Figure    | PDF/SVG |
 | ----- | ------------------------------------------ | --- | --- |
-| Mmp2 | <IMG SRC="ChIP/Mmp2_igv.png" width=250px>   | Fig 3K (top)    | [[PDF](ChIP/Mmp2_igv.pdf)] [[SVG](ChIP/Mmp2_igv.svg)]|
-| Mmp14 | <IMG SRC="ChIP/Mmp14_igv.png" width=250px> | Fig 3K (bottom) | [[PDF](ChIP/Mmp14_igv.pdf)] [[SVG](ChIP/Mmp14_igv.svg)] |
+| Mmp2 | <IMG SRC="ChIP/Mmp2_igv.png" width=250px>   | Fig E5F (top)    | [[PDF](ChIP/Mmp2_igv.pdf)] [[SVG](ChIP/Mmp2_igv.svg)]|
+| Mmp14 | <IMG SRC="ChIP/Mmp14_igv.png" width=250px> | Fig E5F (bottom) | [[PDF](ChIP/Mmp14_igv.pdf)] [[SVG](ChIP/Mmp14_igv.svg)] |
 
 __Figure 3K, Legend__: ChIP tracks for Smad2_3 from [GSE70486](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70486) in TDF format were visualied in IGV (Integrative Genomics Viewer, 10.1038/nbt.1754) and signal intensities were normalised by 1x10^6/total reads to give RPM (Reads per million).
 
