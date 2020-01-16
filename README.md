@@ -12,6 +12,8 @@
 
 Kyprianou, C., Christodoulou, N., Hamilton, R.S., Nahaboo, W., Boomgaard, D., Amadei, G., Migeotte, I. & Zernicka-Goetz, M. [[<s>JOURNAL</s>]](https://) [[<s>DOI</s>]](https://doi.org/) (<i>to be updated on publication</i>)
 
+Code Release to accompany paper: [![DOI](https://zenodo.org/badge/188268304.svg)](https://zenodo.org/badge/latestdoi/188268304)
+
 
 ## Investigating Mmp expression in scRNA-Seq
 
