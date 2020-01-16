@@ -326,7 +326,7 @@ ChIP tracks for Smad2_3 from [GSE70486](https://www.ncbi.nlm.nih.gov/geo/query/a
 | Mmp2 | <IMG SRC="ChIP/Mmp2_igv.png" width=250px>   | Fig E5F (top)    | [[PDF](ChIP/Mmp2_igv.pdf)] [[SVG](ChIP/Mmp2_igv.svg)]|
 | Mmp14 | <IMG SRC="ChIP/Mmp14_igv.png" width=250px> | Fig E5F (bottom) | [[PDF](ChIP/Mmp14_igv.pdf)] [[SVG](ChIP/Mmp14_igv.svg)] |
 
-__Figure 3K, Legend__: ChIP tracks for Smad2_3 from [GSE70486](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70486) in TDF format were visualied in IGV (Integrative Genomics Viewer, 10.1038/nbt.1754) and signal intensities were normalised by 1x10^6/total reads to give RPM (Reads per million).
+__Figure E5, Legend__: ChIP tracks for Smad2_3 from [GSE70486](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70486) in TDF format were visualied in IGV (Integrative Genomics Viewer, 10.1038/nbt.1754) and signal intensities were normalised by 1x10^6/total reads to give RPM (Reads per million).
 
 <P><BR>
 
