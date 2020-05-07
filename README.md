@@ -4,13 +4,14 @@
 
 <sup>1</sup> Mammalian Embryo and Stem Cell Group, University of Cambridge, Department of Physiology, Development and Neuroscience; Downing Street, Cambridge, CB2 3DY, UK <br>
 <sup>2</sup> IRIBHM, Université Libre de Bruxelles, Bruxelles, Belgium<br>
-<sup>3</sup> Department of Genetics, University of Cambridge, Cambridge, UK<br>
+<sup>3a</sup> Department of Genetics, University of Cambridge, Cambridge, UK<br>
+<sup>3b</sup> Centre for Trophoblast Research, University of Cambridge, Cambridge, UK<br>
 <sup>4</sup> equal contribution<br>
 <sup>*</sup> corresponding author: mz205@cam.ac.uk<br>
 
 ### Publication ###
 
-Kyprianou, C., Christodoulou, N., Hamilton, R.S., Nahaboo, W., Boomgaard, D., Amadei, G., Migeotte, I. & Zernicka-Goetz, M. [[<s>JOURNAL</s>]](https://) [[<s>DOI</s>]](https://doi.org/) (<i>to be updated on publication</i>)
+Kyprianou, C., Christodoulou, N., Hamilton, R.S., Nahaboo, W., Boomgaard, D., Amadei, G., Migeotte, I. & Zernicka-Goetz, M. [[Nature]](http://www.nature.com/articles/s41586-020-2264-2) [[DOI]](https://doi.org/10.1038/s41586-020-2264-2)
 
 Code Release to accompany paper: [![DOI](https://zenodo.org/badge/188268304.svg)](https://zenodo.org/badge/latestdoi/188268304)
 
