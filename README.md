@@ -1,4 +1,4 @@
-# Basement membrane remodelling regulates mammalian embryogenesis and gastrulation
+# Basement membrane remodelling regulates mouse embryogenesis
 
 **Christos Kyprianou<sup>1,4</sup>, Neophytos Christodoulou<sup>1,4</sup>, Russell Hamilton<sup>3</sup>, Wallis Nahaboo<sup>2</sup>, Diana Suarez Boomgaard<sup>2</sup>, Gianluca Amadei<sup>1</sup>, Isabelle Migeotte<sup>2</sup>, and Magdalena Zernicka-Goetz<sup>1,*</sup>**
 
@@ -11,7 +11,7 @@
 
 ### Publication ###
 
-Kyprianou, C., Christodoulou, N., Hamilton, R.S., Nahaboo, W., Boomgaard, D., Amadei, G., Migeotte, I. & Zernicka-Goetz, M. [[Nature]](http://www.nature.com/articles/s41586-020-2264-2) [[DOI]](https://doi.org/10.1038/s41586-020-2264-2)
+Kyprianou, C., Christodoulou, N., Hamilton, R.S., Nahaboo, W., Boomgaard, D., Amadei, G., Migeotte, I. & Zernicka-Goetz, M.i (2020) Basement membrane remodelling regulates mouse embryogenesis. [[Nature]](http://www.nature.com/articles/s41586-020-2264-2) [[DOI]](https://doi.org/10.1038/s41586-020-2264-2)
 
 Code Release to accompany paper: [![DOI](https://zenodo.org/badge/188268304.svg)](https://zenodo.org/badge/latestdoi/188268304)
 
